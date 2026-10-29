@@ -1,0 +1,1405 @@
+<!DOCTYPE html>
+
+<html class="no-js" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
+<title>Horizon: More Optimized. Fully Offline.</title>
+<meta content="A fork of Horizon with the Microsoft account stack removed and Mojang-direct file fetching added. More optimized dependencies. Full offline support after setup." name="description"/>
+<meta content="#ece7f7" media="(prefers-color-scheme: light)" name="theme-color"/>
+<meta content="#0f0d17" media="(prefers-color-scheme: dark)" name="theme-color"/>
+<meta content="light dark" name="color-scheme"/>
+<link href="https://jabirking-ux.github.io/horizon-offline-site/" rel="canonical"/>
+<link href="/favicon.svg?v=2a8c0871ae" rel="icon" type="image/svg+xml"/>
+<link href="/favicon-32.png?v=8a1d8759b1" rel="icon" sizes="32x32" type="image/png"/>
+<link href="/apple-touch-icon.png?v=040c885d7e" rel="apple-touch-icon"/>
+<meta content="website" property="og:type"/>
+<meta content="Horizon" property="og:site_name"/>
+<meta content="Horizon: More Optimized. Fully Offline." property="og:title"/>
+<meta content="A fork of Horizon with the Microsoft account stack removed and Mojang-direct file fetching added. More optimized dependencies. Full offline support after setup." property="og:description"/>
+<meta content="https://jabirking-ux.github.io/horizon-offline-site/" property="og:url"/>
+<meta content="https://playhorizon.dev/og.png" property="og:image"/>
+<meta content="1200" property="og:image:width"/>
+<meta content="630" property="og:image:height"/>
+<meta content="Horizon's mark and the line: the game you know, rebuilt in Rust" property="og:image:alt"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="https://playhorizon.dev/og.png" name="twitter:image"/>
+<link crossorigin="" href="https://api.github.com" rel="preconnect"/>
+<link crossorigin="" href="https://raw.githubusercontent.com" rel="preconnect"/>
+
+
+
+<style>:root {
+--page: #ece7f7;
+--plate-soft: #e9e3f8;
+--plate: #ddd4f3;
+--surface: #f8f6fd;
+--rule: #e4ddf4;
+--ink: #1b1530;
+--ink-soft: #3b3354;
+--muted: #585071;
+--accent: #5333c9;
+--on-accent: #ffffff;
+--danger: #a3301d;
+--success: #136336;
+--warn: #7a4f00;
+--side: #e2dbf2;
+--panel: #f8f6fd;
+--raised: #e9e3f8;
+--button: #ddd4f3;
+--button-bevel: #f4f0fe;
+--well: #f3f0fb;
+--bevel: #ffffff;
+--lip: #c3b8e2;
+--outline: #2b2244;
+--face: #5b3fd6;
+--face-bevel: #8069ef;
+--face-lip: #3a2694;
+--on-face: #ffffff;
+color-scheme: light;
+--font: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+--mono: ui-monospace, SFMono-Regular, "Cascadia Code", Consolas, monospace;
+--pixel: ui-sans-serif, system-ui, sans-serif;
+--block-outline: 2px;
+--block-bevel: 2px;
+--block-lip: 4px;
+--text-micro: 11px;
+--text-micro-line: 1.5;
+--text-micro-tracking: 0.04em;
+--text-micro-weight: 400;
+--text-caption: 12px;
+--text-caption-line: 1.5;
+--text-caption-tracking: 0em;
+--text-caption-weight: 400;
+--text-label: 13px;
+--text-label-line: 1.5;
+--text-label-tracking: 0em;
+--text-label-weight: 400;
+--text-ui: 14px;
+--text-ui-line: 1.5;
+--text-ui-tracking: 0em;
+--text-ui-weight: 400;
+--text-body: clamp(15px, calc(15px + 2 * (100vw - 375px) / 1065), 17px);
+--text-body-line: 1.6;
+--text-body-tracking: 0em;
+--text-body-weight: 400;
+--text-heading: clamp(20px, calc(20px + 4 * (100vw - 375px) / 1065), 24px);
+--text-heading-line: 1.3;
+--text-heading-tracking: -0.01em;
+--text-heading-weight: 500;
+--text-title: clamp(32px, calc(32px + 16 * (100vw - 375px) / 1065), 48px);
+--text-title-line: 1.05;
+--text-title-tracking: -0.02em;
+--text-title-weight: 500;
+--text-display: clamp(34px, calc(34px + 30 * (100vw - 375px) / 1065), 64px);
+--text-display-line: 1.05;
+--text-display-tracking: -0.025em;
+--text-display-weight: 500;
+--text-wordmark: 18vw;
+--text-wordmark-line: 0.8;
+--text-wordmark-tracking: -0.04em;
+--text-wordmark-weight: 500;
+--space-1: 4px;
+--space-2: 8px;
+--space-3: 12px;
+--space-4: 16px;
+--space-5: 24px;
+--space-6: 32px;
+--space-7: 48px;
+--space-8: 64px;
+--space-9: 96px;
+--gutter: 64px;
+--gutter-narrow: 16px;
+--radius: 8px;
+--radius-plate: 12px;
+--radius-pill: 999px;
+--rule-width: 1px;
+--control: 32px;
+--control-large: 40px;
+--segment: 28px;
+--field: 36px;
+--row: 86px;
+--index: 40px;
+--plate-bleed: 16px;
+--rise: 8px;
+--measure: 56ch;
+--quick: 150ms;
+--ease-quick: cubic-bezier(0.4, 0, 0.2, 1);
+--move: 240ms;
+--ease-move: cubic-bezier(0.23, 1, 0.32, 1);
+--enter: 600ms;
+--ease-enter: cubic-bezier(0.23, 1, 0.32, 1);
+--stagger: 40ms;
+}
+@media (prefers-color-scheme: dark) {
+:root:not([data-theme="light"]) {
+--page: #0f0d17;
+--plate-soft: #221e34;
+--plate: #2b2641;
+--surface: #1a1727;
+--rule: #120f1c;
+--ink: #ecedf3;
+--ink-soft: #c5c7d1;
+--muted: #a29cb8;
+--accent: #9a86ff;
+--on-accent: #ffffff;
+--danger: #f07a68;
+--success: #45c27a;
+--warn: #f0b84f;
+--side: #0b0a11;
+--panel: #1a1727;
+--raised: #221e34;
+--button: #2b2641;
+--button-bevel: #3d3560;
+--well: #0c0b12;
+--bevel: #342d52;
+--lip: #07060b;
+--outline: #05040a;
+--face: #5b3fd6;
+--face-bevel: #8a74ff;
+--face-lip: #3a2694;
+--on-face: #ffffff;
+color-scheme: dark;
+}
+}
+:root[data-theme="dark"] {
+--page: #0f0d17;
+--plate-soft: #221e34;
+--plate: #2b2641;
+--surface: #1a1727;
+--rule: #120f1c;
+--ink: #ecedf3;
+--ink-soft: #c5c7d1;
+--muted: #a29cb8;
+--accent: #9a86ff;
+--on-accent: #ffffff;
+--danger: #f07a68;
+--success: #45c27a;
+--warn: #f0b84f;
+--side: #0b0a11;
+--panel: #1a1727;
+--raised: #221e34;
+--button: #2b2641;
+--button-bevel: #3d3560;
+--well: #0c0b12;
+--bevel: #342d52;
+--lip: #07060b;
+--outline: #05040a;
+--face: #5b3fd6;
+--face-bevel: #8a74ff;
+--face-lip: #3a2694;
+--on-face: #ffffff;
+color-scheme: dark;
+}
+
+
+
+
+:root {
+--g: clamp(var(--gutter-narrow), 4.5vw, var(--gutter));
+--max: 1440px;
+--nav: 72px;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html {
+background: var(--page);
+color: var(--ink);
+font: 400 var(--text-body) / var(--text-body-line) var(--font);
+font-synthesis: none;
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+text-rendering: optimizeLegibility;
+scroll-behavior: smooth;
+scroll-padding-top: calc(var(--nav) + 16px);
+transition: background-color var(--move) var(--ease-move), color var(--move) var(--ease-move);
+}
+body { margin: 0; min-height: 100vh; overflow-x: clip; }
+img { display: block; max-width: 100%; height: auto; }
+h1, h2, h3 { margin: 0; font-weight: var(--text-heading-weight); }
+p { margin: 0; }
+ol, ul { margin: 0; padding: 0; list-style: none; }
+::selection { background: var(--accent); color: var(--on-accent); }
+a { color: var(--accent); text-decoration: none; transition: color var(--quick) var(--ease-quick); }
+a:hover { color: var(--ink); }
+[hidden] { display: none !important; }
+p a:not(.button):not(.link-arrow), li > p a, .prose a {
+color: inherit; text-decoration: underline; text-decoration-color: var(--rule);
+text-decoration-thickness: 1px; text-underline-offset: 3px;
+transition: text-decoration-color var(--quick) var(--ease-quick);
+}
+p a:not(.button):not(.link-arrow):hover, li > p a:hover, .prose a:hover { text-decoration-color: currentColor; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: var(--radius); }
+code {
+font: 0.86em/1.5 var(--mono);
+background: var(--plate-soft);
+border-radius: 4px;
+padding: 1px 5px;
+overflow-wrap: anywhere;
+}
+.sr-only {
+position: absolute; width: 1px; height: 1px; overflow: hidden;
+clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap;
+}
+.skip {
+position: fixed; left: var(--g); top: 12px; z-index: 50; padding: 8px 14px;
+background: var(--ink); color: var(--page); border-radius: var(--radius-pill);
+transform: translateY(-200%);
+}
+.skip:focus { transform: none; }
+.container { width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 var(--g); }
+.display {
+font-size: var(--text-display); line-height: var(--text-display-line);
+letter-spacing: var(--text-display-tracking); font-weight: var(--text-display-weight);
+text-wrap: balance;
+}
+.title {
+font-size: var(--text-title); line-height: var(--text-title-line);
+letter-spacing: var(--text-title-tracking); font-weight: var(--text-title-weight);
+text-wrap: balance;
+}
+.lede { max-width: var(--measure); color: var(--muted); text-wrap: pretty; }
+.kicker, .meta, .download-meta, .eyebrow, .row-index, .row-meta, .disclaimer, .partner-label {
+font: var(--text-micro-weight) var(--text-micro) / var(--text-micro-line) var(--mono);
+letter-spacing: var(--text-micro-tracking);
+color: var(--muted);
+}
+.kicker { display: flex; gap: 16px; text-transform: uppercase; margin-bottom: 24px; }
+.kicker span { color: var(--ink); }
+.meta { margin-top: 16px; }
+.download-meta { margin-top: 12px; }
+.download-meta a { color: inherit; }
+.button {
+display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+height: var(--control); padding: 0 16px; border: 0; border-radius: var(--radius-pill);
+font: 500 var(--text-label) / 1 var(--font); cursor: pointer; white-space: nowrap;
+transition: background-color var(--quick) var(--ease-quick), color var(--quick) var(--ease-quick), opacity var(--quick) var(--ease-quick);
+}
+.button.large { height: var(--control-large); padding: 0 22px; font-size: var(--text-ui); }
+.button.small { height: 30px; padding: 0 14px; }
+.button.primary { background: var(--accent); color: var(--on-accent); }
+.button.primary:hover { color: var(--on-accent); opacity: 0.88; }
+.button.secondary { background: var(--plate-soft); color: var(--ink); }
+.button.secondary:hover { background: var(--plate); color: var(--ink); }
+.button.ghost { background: transparent; color: var(--muted); }
+.button.ghost:hover { background: var(--plate-soft); color: var(--ink); }
+.button:active { opacity: 0.85; }
+.link-arrow { display: inline-flex; gap: 8px; color: var(--accent); font-weight: 500; }
+.link-arrow span { transition: transform var(--quick) var(--ease-quick); }
+.link-arrow:hover span { transform: translateX(3px); }
+.nav {
+position: fixed; inset: 0 0 auto; z-index: 20; height: var(--nav); max-width: 100vw;
+background: color-mix(in srgb, var(--page) 88%, transparent);
+-webkit-backdrop-filter: blur(16px) saturate(1.2); backdrop-filter: blur(16px) saturate(1.2);
+box-shadow: 0 1px 0 var(--rule);
+transition: background-color var(--move) var(--ease-move), box-shadow var(--move) var(--ease-move);
+}
+.nav-inner { display: flex; align-items: center; gap: 24px; height: 100%; max-width: var(--max); margin: 0 auto; padding: 0 var(--g); }
+.nav-mark { display: inline-flex; align-items: center; gap: 10px; color: var(--ink); font-weight: 500; font-size: var(--text-label); }
+.nav-mark:hover { color: var(--ink); }
+.mark { width: 18px; height: 18px; }
+.mark-stem { fill: var(--ink); }
+.mark-low { fill: var(--ink); opacity: 0.36; }
+.mark-line { fill: var(--accent); }
+.nav-links { display: flex; gap: 2px; margin-left: auto; white-space: nowrap; }
+.nav-links a, .nav-github, .theme-toggle {
+display: inline-flex; align-items: center; height: 32px; padding: 0 12px;
+border-radius: var(--radius-pill); color: var(--muted); font-size: var(--text-label);
+transition: background-color var(--quick) var(--ease-quick), color var(--quick) var(--ease-quick);
+}
+.nav-links a:hover, .nav-github:hover, .theme-toggle:hover { color: var(--ink); background: var(--plate-soft); }
+.nav-sponsor span, span.nav-sponsor { color: #db61a2; }
+.nav-links a[aria-current] { color: var(--ink); background: var(--plate-soft); }
+.nav-end { display: flex; align-items: center; gap: 2px; }
+.theme-toggle {
+border: 0; background: none; cursor: pointer;
+font: var(--text-micro) / 1 var(--mono); letter-spacing: var(--text-micro-tracking); text-transform: uppercase;
+}
+.nav-end .button { margin-left: 8px; }
+.menu-button {
+display: none; align-items: center; gap: 10px; height: 44px; padding: 0 4px 0 14px; margin-left: 4px;
+border: 0; background: none; color: var(--ink); font: 500 var(--text-label) / 1 var(--font); cursor: pointer;
+}
+.menu-icon { position: relative; width: 18px; height: 10px; }
+.menu-icon::before, .menu-icon::after {
+content: ""; position: absolute; left: 0; right: 0; height: 1.5px; border-radius: 1px; background: currentColor;
+transition: transform var(--move) var(--ease-move), top var(--move) var(--ease-move);
+}
+.menu-icon::before { top: 0; }
+.menu-icon::after { top: 8px; }
+.is-menu .menu-icon::before { top: 4px; transform: rotate(45deg); }
+.is-menu .menu-icon::after { top: 4px; transform: rotate(-45deg); }
+.menu {
+position: fixed; inset: var(--nav) 0 0; z-index: 19; display: flex; flex-direction: column; max-width: 100vw;
+justify-content: space-between; gap: 24px; overflow-y: auto; padding: 24px var(--g) 32px; background: var(--page);
+opacity: 0; transition: opacity var(--move) var(--ease-move);
+}
+.menu.is-open { opacity: 1; }
+.menu nav { display: flex; flex-direction: column; flex-shrink: 0; }
+.menu nav a {
+display: flex; align-items: baseline; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--rule);
+color: var(--ink); font-size: var(--text-title); line-height: var(--text-title-line);
+letter-spacing: var(--text-title-tracking); font-weight: 500;
+opacity: 0; transform: translateY(var(--rise));
+transition: opacity var(--enter) var(--ease-enter), transform var(--enter) var(--ease-enter);
+}
+.menu.is-open nav a { opacity: 1; transform: none; }
+.menu-foot { display: flex; flex-direction: column; gap: 16px; flex-shrink: 0; }
+.menu-foot p { font-size: var(--text-caption); color: var(--muted); }
+@media (max-width: 1279px) {
+.nav-links, .nav-github { display: none; }
+.menu-button { display: inline-flex; }
+.nav-end { margin-left: auto; }
+}
+@media (max-width: 520px) {
+.nav-end .button { display: none; }
+}
+.index { border-top: 1px solid var(--rule); }
+.row { position: relative; border-bottom: 1px solid var(--rule); }
+.row > a, .row.card {
+position: relative; display: grid; grid-template-columns: var(--index) 1fr auto; align-items: baseline;
+column-gap: 16px; padding: 18px 0; color: var(--ink);
+}
+.row-index { transition: color var(--quick) var(--ease-quick); }
+.row-name { font-size: var(--text-title); line-height: var(--text-title-line); letter-spacing: var(--text-title-tracking); font-weight: 500; }
+.row-meta { text-align: right; }
+.row > a::before, .row.card::before {
+content: ""; position: absolute; inset: 0 calc(-1 * var(--plate-bleed)); z-index: -1;
+border-radius: var(--radius-plate); background: var(--plate-soft); opacity: 0;
+transition: opacity var(--quick) var(--ease-quick);
+}
+.row > a, .row.card { z-index: 0; }
+.row > a:hover::before, .row.card:hover::before { opacity: 1; }
+.row > a:hover .row-index, .row.card:hover .row-index { color: var(--ink); }
+.row > a:hover, .row.card:hover { color: var(--ink); }
+.hero { padding: calc(var(--nav) + clamp(48px, 9vw, 120px)) 0 clamp(64px, 8vw, 112px); }
+.hero-title { max-width: 14ch; margin-bottom: 20px; }
+.hero .lede { font-size: var(--text-body); }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 32px; }
+.hero-index { margin-top: clamp(48px, 7vw, 88px); }
+.hero .disclaimer { margin-top: 24px; }
+.section { padding: clamp(72px, 10vw, 144px) 0; }
+.section-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px 48px; align-items: end; margin-bottom: 48px; }
+.section-head .kicker { grid-column: 1 / -1; margin-bottom: 0; }
+.section .title { font-size: var(--text-display); line-height: var(--text-display-line); letter-spacing: var(--text-display-tracking); }
+.statement {
+max-width: 28ch; font-size: var(--text-title); line-height: 1.15;
+letter-spacing: var(--text-title-tracking); font-weight: 500; text-wrap: balance;
+}
+.facts { margin-top: 56px; }
+.fact, .features li {
+display: grid; grid-template-columns: var(--index) minmax(0, 18rem) minmax(0, 1fr); column-gap: 16px;
+align-items: baseline; padding: 20px 0;
+}
+.fact h3, .features h3 { font-size: var(--text-heading); line-height: var(--text-heading-line); letter-spacing: var(--text-heading-tracking); }
+.fact p, .features p { max-width: var(--measure); color: var(--muted); }
+.mosaic { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; }
+.tile { margin: 0; grid-column: span 2; }
+.tile-wide { grid-column: span 4; }
+.tile-tall { grid-column: span 2; }
+.tile-wide, .tile-tall { grid-row: span 1; }
+.zoom { display: block; width: 100%; padding: 0; border: 0; background: var(--plate-soft); border-radius: var(--radius-plate); overflow: hidden; cursor: zoom-in; }
+.zoom img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; transition: transform var(--enter) var(--ease-enter); }
+.zoom:hover img { transform: scale(1.02); }
+figcaption { display: flex; gap: 12px; margin-top: 10px; font-size: var(--text-caption); color: var(--muted); }
+figcaption span { font-family: var(--mono); font-size: var(--text-micro); letter-spacing: var(--text-micro-tracking); padding-top: 1px; }
+.parity-hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; align-items: end; margin-bottom: 64px; }
+.count { font-size: clamp(96px, 16vw, 220px); line-height: 0.85; letter-spacing: -0.05em; font-weight: 500; }
+.count .digits span { display: inline-block; }
+.count-label { margin-top: 20px; max-width: 32ch; color: var(--muted); }
+.parity-copy .title { margin-bottom: 16px; }
+.prose { color: var(--ink-soft); max-width: var(--measure); }
+.prose > * + * { margin-top: 12px; }
+.systems { border-top: 1px solid var(--rule); }
+.system {
+display: grid; grid-template-columns: var(--index) minmax(0, 1fr) auto; column-gap: 16px; row-gap: 6px;
+padding: 20px 0; border-bottom: 1px solid var(--rule); position: relative;
+}
+.system-head { display: contents; }
+.system-index { grid-column: 1; grid-row: 1; font: var(--text-micro) / var(--text-micro-line) var(--mono); letter-spacing: var(--text-micro-tracking); color: var(--muted); padding-top: 0.6em; }
+.system h3 { grid-column: 2; grid-row: 1; font-size: var(--text-heading); line-height: var(--text-heading-line); letter-spacing: var(--text-heading-tracking); }
+.system-state {
+grid-column: 3; grid-row: 1; display: inline-flex; align-items: center; gap: 6px; padding-top: 0.5em;
+font: var(--text-micro) / var(--text-micro-line) var(--mono); letter-spacing: var(--text-micro-tracking);
+text-transform: uppercase; color: var(--muted);
+}
+.system.is-full .system-state { color: var(--success); }
+.check { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 1.6; }
+.system-detail { grid-column: 2 / 4; max-width: 72ch; font-size: var(--text-caption); line-height: 1.6; color: var(--muted); }
+.gap { color: var(--ink); font-weight: 500; }
+.legend { max-width: 80ch; }
+.launcher-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(32px, 5vw, 80px); align-items: start; }
+.launcher-copy .title { margin-bottom: 16px; }
+.launcher-copy .features { margin-top: 40px; }
+.features li { grid-template-columns: var(--index) minmax(0, 1fr); row-gap: 4px; }
+.features li p { grid-column: 2; font-size: var(--text-ui); }
+.launcher-actions { margin-top: 32px; }
+.screens { position: sticky; top: calc(var(--nav) + 24px); }
+.tabs { position: relative; display: inline-flex; padding: 2px; gap: 2px; margin-bottom: 16px; border-radius: var(--radius-pill); background: var(--plate-soft); }
+.tabs button {
+position: relative; z-index: 1; height: var(--segment); padding: 0 14px; border: 0; background: none;
+border-radius: var(--radius-pill); color: var(--muted); font: 500 var(--text-label) / 1 var(--font); cursor: pointer;
+transition: color var(--quick) var(--ease-quick);
+}
+.tabs button:hover { color: var(--ink); }
+.tabs button[aria-selected="true"] { color: var(--page); }
+.tab-pill { position: absolute; top: 0; left: 0; border-radius: var(--radius-pill); background: var(--ink); transition: transform var(--move) var(--ease-move), width var(--move) var(--ease-move); }
+.screen { position: relative; aspect-ratio: 16 / 10; border-radius: var(--radius-plate); overflow: hidden; background: var(--plate-soft); }
+.screen-panel { position: absolute; inset: 0; opacity: 0; transition: opacity var(--move) var(--ease-move); }
+.screen-panel.is-active { opacity: 1; }
+.screen-panel img { width: 100%; height: 100%; object-fit: cover; }
+.screen-caption { margin-top: 12px; font-size: var(--text-caption); color: var(--muted); }
+.eyebrow { text-transform: uppercase; }
+.prose h2, .prose h3, .prose h4 { font-size: var(--text-heading); line-height: var(--text-heading-line); color: var(--ink); margin-top: 28px; }
+.prose ul, .prose ol { padding-left: 18px; list-style: disc; }
+.prose li + li { margin-top: 6px; }
+.prose li::marker { color: var(--muted); }
+.prose strong { color: var(--ink); font-weight: 500; }
+.prose pre { padding: 16px; border-radius: var(--radius-plate); background: var(--plate-soft); overflow-x: auto; }
+.prose pre code { background: none; padding: 0; }
+.release { border-top: 1px solid var(--rule); }
+.release:last-of-type { border-bottom: 1px solid var(--rule); }
+.release summary {
+display: grid; grid-template-columns: minmax(0, 12rem) minmax(0, 1fr) auto; gap: 16px; align-items: baseline;
+padding: 18px 0; cursor: pointer; list-style: none;
+}
+.release summary::-webkit-details-marker { display: none; }
+.release-tag { font-size: var(--text-heading); font-weight: 500; letter-spacing: var(--text-heading-tracking); }
+.release-sub { color: var(--muted); font-size: var(--text-ui); }
+.release time { font: var(--text-micro) / 1 var(--mono); letter-spacing: var(--text-micro-tracking); color: var(--muted); }
+.release[open] summary .release-tag { color: var(--accent); }
+.release .prose { padding: 0 0 24px 12rem; margin-left: 16px; font-size: var(--text-ui); }
+.release-more { margin-top: 24px; }
+.cards { margin-top: 48px; }
+.row.card { grid-template-columns: var(--index) minmax(0, 1fr) minmax(0, 1.4fr) auto; }
+.card-title { font-size: var(--text-title); line-height: var(--text-title-line); letter-spacing: var(--text-title-tracking); font-weight: 500; }
+.card-text { color: var(--muted); }
+.card-arrow { color: var(--muted); transition: transform var(--quick) var(--ease-quick), color var(--quick) var(--ease-quick); }
+.card:hover .card-arrow { color: var(--accent); transform: translateX(4px); }
+.contributors { margin-top: 96px; }
+.contributors-title { font-size: var(--text-heading); line-height: var(--text-heading-line); }
+.contributors-text { margin-top: 8px; color: var(--muted); }
+.contributors-list { margin-top: 24px; display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 0 24px; border-top: 1px solid var(--rule); }
+.contributor { display: grid; grid-template-columns: 32px 1fr; column-gap: 12px; align-items: center; padding: 14px 0; border-bottom: 1px solid var(--rule); color: var(--ink); }
+.contributor-avatar { grid-row: span 2; width: 32px; height: 32px; border-radius: 50%; background: var(--plate); }
+.contributor-name { font-weight: 500; }
+.contributor-count { font: var(--text-micro) / 1.4 var(--mono); letter-spacing: var(--text-micro-tracking); color: var(--muted); }
+.contributor:hover .contributor-name { color: var(--accent); }
+.footer { padding: clamp(72px, 9vw, 120px) 0 0; overflow: hidden; }
+.footer-disclaimer { max-width: 24ch; font-size: var(--text-heading); line-height: var(--text-heading-line); letter-spacing: var(--text-heading-tracking); font-weight: 500; }
+.footer-cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; margin-top: 40px; }
+.footer-cols p { font-size: var(--text-caption); line-height: 1.7; color: var(--muted); }
+.footer-bar { display: flex; justify-content: space-between; align-items: center; gap: 24px; margin-top: 56px; font-size: var(--text-caption); color: var(--muted); }
+.footer-links { display: flex; flex-wrap: wrap; gap: 20px; }
+.footer-links a { color: var(--muted); }
+.footer-links a:hover { color: var(--ink); }
+.footer-word {
+box-sizing: border-box; width: 100%; margin: 24px auto 0; padding: 0 var(--g); max-width: var(--max);
+font-size: var(--text-wordmark); line-height: var(--text-wordmark-line); letter-spacing: var(--text-wordmark-tracking);
+font-weight: var(--text-wordmark-weight); color: var(--plate); white-space: nowrap; user-select: none;
+translate: -0.05em 0.12em;
+}
+:root[data-theme="dark"] .footer-word { color: var(--plate-soft); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .footer-word { color: var(--plate-soft); } }
+.lightbox { width: min(1400px, 94vw); max-height: 92vh; padding: 0; border: 0; border-radius: var(--radius-plate); background: var(--surface); color: var(--ink); }
+.lightbox::backdrop { background: color-mix(in srgb, var(--page) 86%, transparent); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+.lightbox img { width: 100%; }
+.lightbox form { position: absolute; top: 12px; right: 12px; }
+.lightbox-caption { padding: 14px 16px; font-size: var(--text-caption); color: var(--muted); }
+.lost { min-height: 100vh; display: flex; flex-direction: column; justify-content: space-between; }
+.lost .hero { padding-top: clamp(96px, 16vh, 200px); }
+.js .reveal, .js .reveal-media {
+opacity: 0; transform: translateY(var(--rise)); filter: blur(4px);
+transition: opacity var(--enter) var(--ease-enter) var(--d, 0ms), transform var(--enter) var(--ease-enter) var(--d, 0ms), filter var(--enter) var(--ease-enter) var(--d, 0ms);
+}
+.js .reveal.is-visible, .js .reveal-media.is-visible { opacity: 1; transform: none; filter: none; }
+.js .systems .system { opacity: 0; transform: translateY(var(--rise)); transition: opacity var(--enter) var(--ease-enter) var(--d, 0ms), transform var(--enter) var(--ease-enter) var(--d, 0ms); }
+.js .systems.is-visible .system { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+html { scroll-behavior: auto; }
+.js .reveal, .js .reveal-media, .js .systems .system { transform: none; filter: none; transition: opacity 200ms linear; }
+.menu nav a, .partner-link:hover { transform: none; }
+}
+@media (pointer: coarse) {
+.button, .button.large, .button.small, .tabs button { height: 44px; }
+.nav-mark, .theme-toggle, .nav-github { min-height: 44px; }
+.link-arrow, .footer-links a { display: inline-flex; align-items: center; min-height: 44px; }
+}
+.partner { max-width: 880px; margin: 0 auto; }
+.docs-main .partner { margin: 28px 0 0; max-width: 72ch; }
+.partner-label { text-transform: uppercase; margin-bottom: 8px; }
+.partner-link { display: block; transition: transform var(--quick) var(--ease-quick), filter var(--quick) var(--ease-quick); }
+.partner-link img { display: block; width: 100%; height: auto; }
+.partner-link:hover { transform: translateY(-2px); filter: brightness(1.06); }
+@media (max-width: 900px) {
+.section-head, .parity-hero, .launcher-grid { grid-template-columns: minmax(0, 1fr); }
+.section-head { gap: 16px; }
+.screens { position: static; }
+.fact { grid-template-columns: var(--index) minmax(0, 1fr); row-gap: 6px; }
+.fact p { grid-column: 2; }
+.mosaic { grid-template-columns: minmax(0, 1fr); }
+.tile, .tile-wide, .tile-tall { grid-column: auto; }
+.row.card { grid-template-columns: var(--index) minmax(0, 1fr) auto; row-gap: 4px; }
+.card-text { grid-column: 2; grid-row: 2; font-size: var(--text-ui); }
+.card-arrow { grid-row: 1; grid-column: 3; }
+.release summary { grid-template-columns: minmax(0, 1fr) auto; }
+.release-sub { grid-column: 1 / -1; grid-row: 2; }
+.release .prose { padding-left: 0; margin-left: 0; }
+.footer-cols { grid-template-columns: minmax(0, 1fr); }
+.footer-bar { flex-direction: column; align-items: flex-start; }
+.system { grid-template-columns: var(--index) minmax(0, 1fr); }
+.system-state { grid-column: 2; grid-row: 2; padding-top: 0; }
+.system-detail { grid-column: 2; }
+.row > a { grid-template-columns: 28px 1fr auto; padding: 16px 0; }
+:root { --index: 28px; }
+}
+.privacy h1 { margin-bottom: 16px; }
+.privacy .prose { margin: 40px 0; }
+.privacy .disclaimer { margin-top: 32px; }
+.docs {
+display: grid; grid-template-columns: 248px minmax(0, 1fr); gap: clamp(32px, 6vw, 96px);
+max-width: var(--max); margin: 0 auto; padding: calc(var(--nav) + 48px) var(--g) 0; align-items: start;
+}
+.docs-nav-wrap { position: sticky; top: calc(var(--nav) + 24px); max-height: calc(100vh - var(--nav) - 48px); overflow-y: auto; padding-bottom: 24px; }
+.docs-nav-wrap summary { display: none; }
+.docs-nav-group { margin: 28px 0 8px; font: var(--text-micro) / var(--text-micro-line) var(--mono); letter-spacing: var(--text-micro-tracking); text-transform: uppercase; color: var(--muted); }
+.docs-nav-group:first-child { margin-top: 0; }
+.docs-nav li a { display: block; padding: 6px 12px; margin-left: -12px; border-radius: var(--radius); color: var(--ink-soft); font-size: var(--text-ui); }
+.docs-nav li a:hover { background: var(--plate-soft); color: var(--ink); }
+.docs-nav li a[aria-current] { background: var(--plate-soft); color: var(--ink); font-weight: 500; }
+.docs-main { min-width: 0; padding-bottom: 48px; }
+.docs-main .title { margin-bottom: 16px; }
+.docs-main .lede { max-width: 64ch; font-size: var(--text-heading); line-height: 1.45; }
+.docs-toc { margin-top: 28px; max-width: 72ch; }
+.docs-toc p { font: var(--text-micro) / var(--text-micro-line) var(--mono); letter-spacing: var(--text-micro-tracking); text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+.docs-toc ul { display: flex; flex-wrap: wrap; gap: 6px; }
+.docs-toc a { display: block; padding: 4px 12px; border-radius: var(--radius-pill); background: var(--plate-soft); color: var(--ink-soft); font-size: var(--text-label); }
+.docs-toc a:hover { background: var(--plate); color: var(--ink); }
+.docs-prose { max-width: 72ch; margin-top: 40px; font-size: var(--text-body); }
+.docs-prose > * + * { margin-top: 14px; }
+.docs-prose h2 { margin-top: 56px; padding-top: 24px; border-top: 1px solid var(--rule); font-size: clamp(24px, 2.4vw, 30px); line-height: 1.2; letter-spacing: var(--text-title-tracking); scroll-margin-top: 80px; }
+.docs-prose h2:first-child { margin-top: 0; padding-top: 0; border-top: 0; }
+.docs-prose h3 { margin-top: 32px; scroll-margin-top: 80px; }
+.docs-prose ol { list-style: decimal; }
+.docs-prose pre { font: 0.86em/1.6 var(--mono); }
+.docs-prose blockquote { padding: 2px 0 2px 16px; border-left: 2px solid var(--accent); color: var(--ink-soft); }
+.docs-prose blockquote > * + * { margin-top: 8px; }
+.docs-prose figure { margin: 28px 0; }
+.docs-prose figure img { width: 100%; border-radius: var(--radius-plate); box-shadow: 0 0 0 1px var(--rule); }
+.docs-prose figcaption { margin-top: 10px; font-size: var(--text-caption); color: var(--muted); }
+.docs-pager { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; max-width: 72ch; margin-top: 56px; }
+.docs-pager a { display: flex; flex-direction: column; gap: 2px; padding: 14px 16px; border-radius: var(--radius-plate); box-shadow: 0 0 0 1px var(--rule); color: var(--ink); font-weight: 500; }
+.docs-pager a:hover { background: var(--plate-soft); color: var(--ink); }
+.docs-pager a span { font: var(--text-micro) / var(--text-micro-line) var(--mono); letter-spacing: var(--text-micro-tracking); text-transform: uppercase; color: var(--muted); font-weight: 400; }
+.docs-pager-next { grid-column: 2; text-align: right; }
+.docs-edit { margin-top: 32px; font-size: var(--text-caption); color: var(--muted); }
+.docs-edit a { color: inherit; text-decoration: underline; text-decoration-color: var(--rule); text-underline-offset: 3px; }
+.docs-main .disclaimer { margin-top: 24px; }
+@media (max-width: 900px) {
+.docs { grid-template-columns: minmax(0, 1fr); gap: 0; padding-top: calc(var(--nav) + 12px); }
+.docs-nav-wrap { position: static; max-height: none; overflow: visible; margin-bottom: 24px; border-bottom: 1px solid var(--rule); }
+.docs-nav-wrap summary { display: flex; align-items: center; min-height: 44px; cursor: pointer; font-weight: 500; list-style: none; }
+.docs-nav-wrap summary::-webkit-details-marker { display: none; }
+.docs-nav-wrap summary::after { content: "+"; margin-left: auto; color: var(--muted); }
+.docs-nav-wrap[open] summary::after { content: "\2212"; }
+.docs-pager { grid-template-columns: minmax(0, 1fr); }
+.docs-pager-next { grid-column: 1; }
+}
+@media (pointer: coarse) {
+.docs-nav li a, .docs-toc a { display: flex; align-items: center; min-height: 44px; }
+}
+
+
+
+:root {
+--stone: url("/media/stone-light.png");
+--scene: url("/media/scene-light.png");
+--sky: #8d7fd8;
+--panel-edges: inset 0 var(--block-bevel) 0 var(--bevel), inset 0 calc(-1 * var(--block-bevel)) 0 var(--lip);
+--radius: 0px; --radius-plate: 0px; --radius-pill: 0px;
+}
+:root[data-theme="dark"] { --stone: url("/media/stone-dark.png"); --scene: url("/media/scene-dark.png"); --sky: #0a0f2c; }
+@media (prefers-color-scheme: dark) {
+:root:not([data-theme="light"]) { --stone: url("/media/stone-dark.png"); --scene: url("/media/scene-dark.png"); --sky: #0a0f2c; }
+}
+body { position: relative; isolation: isolate; }
+body::before {
+content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+background: var(--stone) 0 0 / 256px 256px repeat; image-rendering: pixelated;
+}
+.display, .title, .statement, .row-name, .card-title, .release-tag, .count,
+.fact h3, .features h3, .system h3, .contributors-title, .footer-disclaimer, .footer-word,
+.nav-mark, .docs-prose h2, .docs-prose h3, .prose h2, .prose h3, .prose h4, .menu nav a {
+font-family: var(--pixel); font-weight: 600; letter-spacing: 0;
+}
+.display, .count, .footer-word { font-weight: 700; }
+.nav-mark { font-size: 18px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }
+code { border-radius: 0; background: var(--well); box-shadow: 0 0 0 1px var(--outline); }
+.button {
+border: var(--block-outline) solid var(--outline); border-radius: 0;
+font: 500 var(--text-ui) / 1 var(--pixel);
+box-shadow: inset 0 var(--block-bevel) 0 var(--button-bevel), inset 0 calc(-1 * var(--block-lip)) 0 var(--lip);
+padding-bottom: 2px;
+}
+.button.large { font-size: 18px; }
+.button.primary { background: var(--face); color: var(--on-face); box-shadow: inset 0 var(--block-bevel) 0 var(--face-bevel), inset 0 calc(-1 * var(--block-lip)) 0 var(--face-lip); }
+.button.primary:hover { opacity: 1; filter: brightness(1.08); }
+.button.secondary { background: var(--button); }
+.button.secondary:hover { background: var(--button); filter: brightness(1.06); }
+.button.ghost { border-color: transparent; box-shadow: none; }
+.button:active { opacity: 1; transform: translateY(1px); box-shadow: inset 0 var(--block-bevel) 0 var(--lip); }
+:focus-visible { border-radius: 0; }
+.nav { background: var(--side); -webkit-backdrop-filter: none; backdrop-filter: none; box-shadow: 0 var(--block-outline) 0 var(--outline); }
+.nav-links a, .nav-github, .theme-toggle { border-radius: 0; font-family: var(--pixel); font-weight: 500; font-size: 15px; }
+.nav-links a:hover, .nav-github:hover, .theme-toggle:hover { background: var(--raised); }
+.nav-links a[aria-current] { background: var(--raised); box-shadow: inset 0 -3px 0 var(--accent); }
+.theme-toggle { text-transform: none; letter-spacing: 0; }
+.menu { background: var(--side); }
+.menu nav a { border-bottom: 0; }
+.index, .systems, .contributors-list { border-top: 0; display: grid; gap: 8px; }
+.row, .system, .release, .release:last-of-type, .contributor { border-bottom: 0; border-top: 0; }
+.row > a, .row.card, .fact.row, .features li, .system, .release, .contributor, .docs-pager a {
+background: var(--panel); border: var(--block-outline) solid var(--outline); box-shadow: var(--panel-edges);
+border-radius: 0;
+}
+.row > a, .row.card, .fact.row, .features li, .system { padding-left: 20px; padding-right: 20px; }
+.row > a::before, .row.card::before { display: none; }
+.row > a:hover, .row.card:hover, .contributor:hover, .docs-pager a:hover { background: var(--raised); }
+.row > a:hover .row-index { color: var(--accent); }
+.row-name { font-size: clamp(20px, 2.2vw, 28px); }
+.release { padding: 0 20px; }
+.release + .release { margin-top: 8px; }
+.release .prose { padding-left: 12rem; }
+.contributor { padding: 12px 14px; }
+.contributors-list { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 8px; }
+.contributor-avatar { border-radius: 0; box-shadow: 0 0 0 2px var(--outline); image-rendering: pixelated; }
+.system.is-full .system-state { color: var(--success); }
+.zoom, .screen, .lightbox, .prose pre, .docs-prose figure img { border-radius: 0; box-shadow: 0 0 0 var(--block-outline) var(--outline); }
+.tabs { border-radius: 0; background: var(--well); box-shadow: 0 0 0 var(--block-outline) var(--outline); }
+.tabs button { border-radius: 0; font-family: var(--pixel); font-weight: 500; font-size: 15px; }
+.tabs button[aria-selected="true"] { color: var(--on-face); }
+.tab-pill { border-radius: 0; background: var(--face); box-shadow: inset 0 var(--block-bevel) 0 var(--face-bevel), inset 0 calc(-1 * var(--block-bevel)) 0 var(--face-lip); }
+.hero {
+position: relative; isolation: isolate; overflow: hidden;
+background: var(--scene) 70% 100% / clamp(1200px, 135vw, 2400px) auto no-repeat, var(--sky); image-rendering: pixelated;
+border-bottom: var(--block-outline) solid var(--outline);
+}
+.hero::before {
+content: ""; position: absolute; inset: 0; z-index: -1;
+background:
+linear-gradient(90deg, color-mix(in srgb, var(--page) 92%, transparent) 0%, color-mix(in srgb, var(--page) 78%, transparent) 45%, color-mix(in srgb, var(--page) 0%, transparent) 78%),
+linear-gradient(180deg, color-mix(in srgb, var(--page) 0%, transparent) 55%, color-mix(in srgb, var(--page) 70%, transparent) 100%);
+}
+.hero .kicker span, .hero .kicker { color: var(--ink-soft); }
+.hero .lede { color: var(--ink-soft); }
+.hero { padding-bottom: clamp(160px, 18vw, 280px); }
+.hero-after { padding-top: 40px; }
+.hero-after .hero-index { margin-top: 0; max-width: 860px; }
+.hero-after .disclaimer { margin-top: 24px; }
+@media (max-width: 900px) {
+.hero::before { background: color-mix(in srgb, var(--page) 84%, transparent); }
+}
+.docs-nav li a { border-radius: 0; }
+.docs-nav li a[aria-current] { background: var(--raised); box-shadow: inset 4px 0 0 var(--accent); }
+.docs-toc a { border-radius: 0; background: var(--button); box-shadow: 0 0 0 var(--block-outline) var(--outline); }
+.docs-pager a { box-shadow: var(--panel-edges); }
+.docs-prose h2 { border-top: var(--block-outline) solid var(--outline); }
+.docs-prose blockquote { border-left: 4px solid var(--accent); background: var(--panel); padding: 10px 16px; box-shadow: 0 0 0 var(--block-outline) var(--outline); }
+.footer { background: var(--side); border-top: var(--block-outline) solid var(--outline); margin-top: 48px; }
+.footer-word { color: var(--raised); letter-spacing: 0.02em; }
+:root[data-theme="dark"] .footer-word { color: var(--panel); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .footer-word { color: var(--panel); } }
+:root { font-variant-ligatures: no-common-ligatures; }
+.page-main { padding-top: calc(var(--nav) + clamp(40px, 6vw, 80px)); }
+.page-title { max-width: 18ch; margin-bottom: 20px; }
+.page-main > .container > .lede { font-size: var(--text-body); }
+.page-main .disclaimer { margin-top: 48px; }
+.badge {
+display: inline-flex; align-items: center; height: 22px; padding: 0 8px; margin-right: 10px; vertical-align: 2px;
+font: 500 12px / 1 var(--pixel); letter-spacing: 0.02em; text-transform: uppercase; white-space: nowrap;
+border: var(--block-outline) solid var(--outline); background: var(--well); color: var(--ink-soft);
+}
+.badge-game { background: color-mix(in srgb, var(--success) 22%, var(--panel)); color: var(--ink); }
+.badge-launcher { background: color-mix(in srgb, var(--accent) 20%, var(--panel)); color: var(--ink); }
+.badge-us { background: color-mix(in srgb, var(--accent) 20%, var(--panel)); color: var(--ink); }
+.badge-players { background: color-mix(in srgb, var(--success) 22%, var(--panel)); color: var(--ink); }
+.badge-estimate { background: color-mix(in srgb, var(--warn) 24%, var(--panel)); color: var(--ink); }
+.recent-list .row > a { grid-template-columns: 8.5rem minmax(0, 13rem) minmax(0, 1fr) auto; align-items: baseline; }
+.recent-line { color: var(--muted); min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.recent-list .row-name { font-size: clamp(18px, 1.8vw, 22px); }
+.recent-list .badge { margin-right: 0; }
+.recent-picks { margin-top: 32px; }
+.recent-picks .eyebrow { margin-bottom: 12px; }
+.highlights { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.highlight {
+display: flex; flex-direction: column; justify-content: space-between; gap: 16px; padding: 18px 20px;
+background: var(--panel); border: var(--block-outline) solid var(--outline); box-shadow: var(--panel-edges);
+}
+.highlight p { color: var(--ink); }
+.highlight-from { font: var(--text-micro) / 1 var(--mono); letter-spacing: var(--text-micro-tracking); color: var(--muted); }
+.highlight-from:hover { color: var(--accent); }
+.release-filter { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 32px; }
+.release-filter .button[aria-pressed="true"], .hub-detail .button[aria-pressed="true"], .button.hub-vote[aria-pressed="true"] { background: var(--face); color: var(--on-face); box-shadow: inset 0 var(--block-bevel) 0 var(--face-bevel), inset 0 calc(-1 * var(--block-lip)) 0 var(--face-lip); }
+.release-count { margin: 16px 0 12px; }
+.release-list { display: grid; gap: 8px; }
+.release-list .release + .release { margin-top: 0; }
+.release-entry summary { grid-template-columns: minmax(0, 11rem) minmax(0, 1fr) auto; }
+.release-entry .release-sub { display: flex; align-items: baseline; flex-wrap: wrap; row-gap: 4px; }
+.release-detail { padding: 0 0 24px 11rem; margin-left: 16px; display: grid; gap: 20px; max-width: calc(11rem + 16px + var(--measure) + 120px); }
+.release-detail .prose { padding: 0; margin: 0; font-size: var(--text-ui); max-width: none; }
+.release-overview { padding: 16px 18px; background: var(--well); box-shadow: 0 0 0 var(--block-outline) var(--outline); }
+.release-counts { font-family: var(--pixel); font-weight: 600; color: var(--ink); margin-bottom: 8px; }
+.release-overview ul { list-style: square; padding-left: 18px; color: var(--ink-soft); font-size: var(--text-ui); }
+.release-overview li + li { margin-top: 4px; }
+.release-downloads ul { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 8px; margin-top: 8px; }
+.release-downloads li { display: flex; flex-direction: column; gap: 2px; padding: 10px 12px; background: var(--button); box-shadow: 0 0 0 var(--block-outline) var(--outline); }
+.release-downloads li a { font-weight: 500; }
+.release-downloads li span { font: var(--text-micro) / 1.4 var(--mono); color: var(--muted); overflow-wrap: anywhere; }
+.release-github { font-size: var(--text-caption); }
+.release-entry:target { box-shadow: var(--panel-edges), 0 0 0 3px var(--accent); }
+.bench-section { margin-top: clamp(64px, 8vw, 112px); }
+.bench-section > .title { margin-bottom: 16px; }
+.bench-section > .lede { margin-bottom: 32px; }
+.machines { display: grid; grid-template-columns: minmax(0, 1fr); gap: 24px; }
+.machine { min-width: 0; padding: 24px; background: var(--panel); border: var(--block-outline) solid var(--outline); box-shadow: var(--panel-edges); }
+.machine-head { display: grid; gap: 10px; margin-bottom: 20px; }
+.machine-name { font-family: var(--pixel); font-weight: 600; font-size: var(--text-title); line-height: var(--text-title-line); }
+.machine-facts { display: flex; flex-wrap: wrap; gap: 6px 28px; margin: 0; }
+.machine-facts div { display: flex; gap: 8px; min-width: 0; }
+.machine-facts dt { font: var(--text-micro) / 1.6 var(--mono); letter-spacing: var(--text-micro-tracking); text-transform: uppercase; color: var(--muted); }
+.machine-facts dd { margin: 0; min-width: 0; overflow-wrap: anywhere; font-size: var(--text-caption); color: var(--ink-soft); }
+.machine-note { font-size: var(--text-caption); color: var(--muted); max-width: 90ch; }
+.table-wrap { position: relative; overflow-x: auto; }
+.bench-table { width: 100%; border-collapse: collapse; font-size: var(--text-ui); }
+.bench-table th, .bench-table td { padding: 9px 12px; text-align: left; border-bottom: 1px solid var(--rule); vertical-align: baseline; }
+.bench-table thead th { font: var(--text-micro) / 1.4 var(--mono); letter-spacing: var(--text-micro-tracking); text-transform: uppercase; color: var(--muted); font-weight: 400; }
+.bench-table thead tr:first-child th { color: var(--ink); }
+.bench-table tbody th { font-weight: 500; color: var(--ink); }
+.bench-table td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.bench-table td.wins { color: var(--ink); font-weight: 600; }
+.bench-table td.vs { font-size: var(--text-caption); white-space: nowrap; }
+.md-table { width: 100%; border-collapse: collapse; font-size: var(--text-ui); }
+.md-table th, .md-table td { padding: 8px 12px 8px 0; text-align: left; border-bottom: 1px solid var(--rule); vertical-align: baseline; }
+.md-table th { font-weight: 500; color: var(--ink); }
+.md-table td code, .md-table th code { overflow-wrap: anywhere; }
+.vs-horizon { color: var(--success); }
+.vs-java { color: var(--danger); }
+.vs-tie, .vs-none { color: var(--muted); }
+.capped { font: var(--text-micro) / 1 var(--mono); color: var(--warn); cursor: help; }
+.metric-hint { display: block; font: var(--text-micro) / 1.4 var(--mono); color: var(--muted); font-weight: 400; }
+.java-wins { margin-top: 16px; font-size: var(--text-caption); color: var(--ink-soft); }
+.picker { display: flex; flex-wrap: wrap; gap: 16px 24px; align-items: end; padding: 20px; background: var(--panel); border: var(--block-outline) solid var(--outline); box-shadow: var(--panel-edges); }
+.picker label { display: grid; gap: 6px; }
+.picker label > span, .picker legend { font: var(--text-micro) / 1.4 var(--mono); letter-spacing: var(--text-micro-tracking); text-transform: uppercase; color: var(--muted); }
+.picker select {
+min-width: min(320px, 80vw); height: var(--control); padding: 0 10px; font: inherit; font-size: var(--text-ui); color: var(--ink);
+background: var(--well); border: var(--block-outline) solid var(--outline); border-radius: 0;
+}
+.picker-rd { display: flex; gap: 16px; align-items: center; border: 0; padding: 0; margin: 0; }
+.picker-rd legend { margin-bottom: 6px; }
+.picker-rd label { display: inline-flex; align-items: center; gap: 6px; font-family: var(--pixel); font-weight: 500; height: var(--control); }
+.picker-rd input { accent-color: var(--accent); width: 18px; height: 18px; }
+.pick-result { margin-top: 16px; padding: 20px; background: var(--panel); border: var(--block-outline) solid var(--outline); box-shadow: var(--panel-edges); }
+.pick-head { margin-bottom: 12px; font-size: var(--text-caption); color: var(--ink-soft); line-height: 1.8; }
+.pick-result .meta { margin-top: 12px; }
+.pick-notes { margin: 12px 0 0; padding-left: 20px; font-size: var(--text-caption); color: var(--ink-soft); line-height: 1.6; }
+.players-hardware th[scope="rowgroup"] { vertical-align: top; }
+.empty { color: var(--muted); }
+.prose-section .prose { max-width: 80ch; }
+.spec-table { margin-top: 24px; }
+.spec-table summary { cursor: pointer; font-family: var(--pixel); font-weight: 600; }
+.spec-table .bench-table { margin-top: 16px; max-width: 760px; }
+@media (max-width: 900px) {
+.recent-list .row > a { grid-template-columns: minmax(0, 1fr) auto; row-gap: 4px; }
+.recent-list .row-index { grid-column: 1; grid-row: 1; }
+.recent-list .row-name { grid-column: 1; grid-row: 2; }
+.recent-line { grid-column: 1 / -1; grid-row: 3; white-space: normal; }
+.recent-list .row-meta { grid-column: 2; grid-row: 1; }
+.highlights { grid-template-columns: minmax(0, 1fr); }
+.release-entry summary { grid-template-columns: minmax(0, 1fr) auto; }
+.release-detail { padding-left: 0; margin-left: 0; }
+.machine { padding: 16px; }
+}
+.hub-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; margin-top: 32px; }
+.hub-tabs { margin-bottom: 0; }
+.hub-detail { display: flex; gap: 8px; }
+.hub-panel { margin-top: 40px; scroll-margin-top: calc(var(--nav) + 120px); }
+.js .hub-panel:not(.is-active) { display: none; }
+.hub .hub-dev { display: none; }
+:root[data-detail="dev"] .hub .hub-dev { display: block; }
+:root[data-detail="dev"] .hub .hub-plain { display: none; }
+.hub-lead { max-width: 60ch; font-size: var(--text-heading); line-height: var(--text-heading-line); color: var(--ink); }
+.hub-block { margin-top: 56px; }
+.hub-block > .title { margin-bottom: 16px; }
+.hub-intro { margin-bottom: 16px; color: var(--ink-soft); max-width: var(--measure); }
+.hub-rows .row > a { grid-template-columns: var(--index) minmax(0, 1fr) auto; align-items: baseline; }
+.hub-row-body { display: grid; gap: 4px; min-width: 0; }
+.hub-row-title { font-size: clamp(18px, 1.8vw, 22px); font-weight: 500; color: var(--ink); }
+.hub-row-body .hub-plain, .hub-row-body .hub-dev { color: var(--ink-soft); font-size: var(--text-ui); max-width: 80ch; }
+.hub-rows .row-meta { max-width: 16rem; }
+.hub-section { margin-top: 48px; }
+.hub-section-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 20px; }
+.hub-items { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 8px; margin-top: 16px; }
+.hub-item {
+display: flex; flex-direction: column; gap: 10px; padding: 18px 20px; scroll-margin-top: calc(var(--nav) + 24px);
+background: var(--panel); border: var(--block-outline) solid var(--outline); box-shadow: var(--panel-edges);
+}
+.hub-item:target { box-shadow: var(--panel-edges), 0 0 0 3px var(--accent); }
+.hub-item-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.hub-item-meta .badge { margin-right: 0; }
+.hub-ongoing { font: var(--text-micro) / 1 var(--mono); letter-spacing: var(--text-micro-tracking); color: var(--muted); }
+.hub-item-title { font-size: var(--text-heading); line-height: var(--text-heading-line); }
+.hub-item .hub-plain, .hub-item .hub-dev { font-size: var(--text-ui); color: var(--ink-soft); }
+.hub-progress { font: var(--text-micro) / 1.4 var(--mono); letter-spacing: var(--text-micro-tracking); color: var(--ink); }
+.hub-links { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; padding-top: 4px; }
+.hub-link {
+display: inline-flex; gap: 6px; align-items: baseline; padding: 3px 7px; font: var(--text-micro) / 1.3 var(--mono);
+color: var(--ink-soft); background: var(--well); box-shadow: 0 0 0 var(--block-outline) var(--outline);
+}
+.hub-link span { color: var(--muted); }
+.hub-link:hover { color: var(--accent); }
+.hub-link.is-merged { background: color-mix(in srgb, var(--success) 18%, var(--well)); }
+.hub-link.is-in-review { background: color-mix(in srgb, var(--accent) 18%, var(--well)); }
+.hub-link.is-in-progress { background: color-mix(in srgb, var(--warn) 22%, var(--well)); }
+.hub-link.is-merged span, .hub-link.is-in-review span, .hub-link.is-in-progress span { color: var(--ink); }
+.hub-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); gap: 8px; }
+.hub-cards .highlight { justify-content: flex-start; }
+.hub-cards h3 { font-size: var(--text-heading); line-height: var(--text-heading-line); }
+.hub-cards p { color: var(--ink-soft); font-size: var(--text-ui); }
+.hub-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+.hub-cards .hub-actions { margin-top: auto; }
+.hub-rules { list-style: decimal; padding-left: 20px; max-width: var(--measure); }
+.hub-rules li + li { margin-top: 10px; }
+.hub-rules li::marker { color: var(--muted); font-family: var(--mono); }
+.hub-source { margin-top: 40px; max-width: var(--measure); }
+.hub-board-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px; }
+.hub-board-head .hub-intro { margin-bottom: 0; }
+.hub-select { display: inline-flex; align-items: center; gap: 10px; }
+.hub-select select {
+height: 32px; max-width: 22rem; padding: 0 10px; font: var(--text-label) / 1 var(--font); color: var(--ink);
+background: var(--well); border: 0; box-shadow: 0 0 0 var(--block-outline) var(--outline);
+}
+.hub-board { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin-top: 24px; align-items: start; }
+.hub-column { padding: 14px; background: var(--panel); border: var(--block-outline) solid var(--outline); box-shadow: var(--panel-edges); }
+.hub-column h3 { display: flex; justify-content: space-between; align-items: baseline; font-size: var(--text-heading); }
+.hub-count { font: var(--text-micro) / 1 var(--mono); color: var(--muted); }
+.hub-column > .meta { margin: 6px 0 12px; }
+.hub-cards-list { display: grid; gap: 6px; }
+.js .hub-column:not(.is-open) .hub-card[data-more] { display: none; }
+.hub-card a { display: grid; gap: 4px; padding: 10px 12px; background: var(--well); box-shadow: 0 0 0 var(--block-outline) var(--outline); color: var(--ink); }
+.hub-card a:hover { box-shadow: 0 0 0 var(--block-outline) var(--accent); }
+.hub-card-ref, .hub-card-meta { font: var(--text-micro) / 1.4 var(--mono); letter-spacing: var(--text-micro-tracking); color: var(--muted); }
+.hub-card-title { font-size: var(--text-label); line-height: 1.4; overflow-wrap: anywhere; }
+.hub-card-meta { display: flex; flex-wrap: wrap; gap: 4px 10px; }
+.hub-card-item { color: var(--accent); }
+.hub-more { margin-top: 10px; width: 100%; justify-content: center; }
+.hub-journal { display: grid; gap: 8px; margin-top: 24px; max-width: 56rem; }
+.hub-entry { display: grid; gap: 10px; padding: 18px 20px; background: var(--panel); border: var(--block-outline) solid var(--outline); box-shadow: var(--panel-edges); scroll-margin-top: calc(var(--nav) + 24px); }
+.hub-entry-week { background: color-mix(in srgb, var(--accent) 8%, var(--panel)); }
+.hub-entry-meta { display: flex; align-items: center; gap: 10px; font: var(--text-micro) / 1 var(--mono); color: var(--muted); }
+.hub-entry-meta .badge { margin-right: 0; }
+.hub-entry-title { font-size: var(--text-heading); line-height: var(--text-heading-line); }
+.hub-entry-title a { color: var(--ink); }
+.hub-entry-title a:hover { color: var(--accent); }
+.hub-entry .hub-plain, .hub-entry .hub-dev { font-size: var(--text-ui); color: var(--ink-soft); }
+.hub-entry-items { display: flex; flex-wrap: wrap; gap: 6px; }
+.hub-shipped { font-size: var(--text-ui); color: var(--ink); }
+.hub-changes { list-style: square; padding-left: 18px; font-size: var(--text-ui); color: var(--ink-soft); }
+.hub-changes li + li { margin-top: 4px; }
+.hub-ref { font: var(--text-micro) / 1 var(--mono); }
+.hub-group { margin-top: 8px; font: 500 var(--text-label) / 1.4 var(--font); }
+.hub-group:first-child { margin-top: 0; }
+@media (max-width: 1100px) { .hub-board { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 720px) {
+.hub-board { grid-template-columns: minmax(0, 1fr); }
+.hub-rows .row > a { grid-template-columns: var(--index) minmax(0, 1fr); }
+.hub-rows .row-meta { grid-column: 2; text-align: left; }
+}
+.hub-vote { margin-left: auto; }
+.hub-vote-count { margin-left: -2px; }
+.hub-vote-count:empty { display: none; }
+.hub-form { display: grid; gap: 16px; max-width: 46rem; margin-top: 8px; }
+.hub-form-pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.hub-field { display: grid; gap: 6px; font-size: var(--text-label); color: var(--ink-soft); }
+.hub-field input, .hub-field textarea, .hub-field select {
+width: 100%; min-height: 36px; padding: 8px 10px; font: var(--text-ui) / 1.4 var(--font); color: var(--ink);
+background: var(--well); border: 0; box-shadow: 0 0 0 var(--block-outline) var(--outline);
+}
+.hub-field textarea { resize: vertical; }
+.hub-field input:focus-visible, .hub-field textarea:focus-visible, .hub-field select:focus-visible { outline: 1px solid var(--accent); outline-offset: 2px; }
+.hub-field input::placeholder, .hub-field textarea::placeholder { color: var(--muted); }
+.hub-trap { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+.hub-form-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; }
+.hub-form-foot [data-status] { color: var(--ink); }
+.hub-form-foot .button:disabled { opacity: 0.4; cursor: default; }
+.hub-form-closed { color: var(--ink-soft); }
+@media (max-width: 720px) {
+.hub-form-pair { grid-template-columns: minmax(0, 1fr); }
+}
+.mod-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+.mod-tools { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; margin-top: 32px; }
+.mod-tools .release-filter { margin-top: 0; }
+.mod-search {
+height: 36px; min-width: min(320px, 100%); padding: 0 12px; font: var(--text-ui) / 1 var(--sans); color: var(--ink);
+background: var(--well); border: var(--block-outline) solid var(--outline); border-radius: 0;
+}
+.mod-search:focus-visible { outline: 2px solid var(--accent); outline-offset: 0; }
+.mod-list { display: grid; gap: 8px; }
+.mod-row {
+display: grid; grid-template-columns: 48px minmax(0, 1fr) auto; align-items: center; gap: 16px; padding: 14px 20px;
+background: var(--panel); border: var(--block-outline) solid var(--outline); box-shadow: var(--panel-edges); color: var(--ink); text-decoration: none;
+}
+.mod-row:hover { background: var(--raised); }
+.mod-row:hover .mod-name { color: var(--accent); }
+.mod-icon {
+display: grid; place-items: center; width: 48px; height: 48px; flex: none; image-rendering: pixelated;
+font: 600 22px / 1 var(--pixel); color: var(--ink); background: var(--well); box-shadow: 0 0 0 var(--block-outline) var(--outline);
+}
+.mod-text { display: grid; gap: 4px; min-width: 0; }
+.mod-name { font: 500 var(--text-heading) / 1.2 var(--pixel); }
+.mod-summary { color: var(--muted); font-size: var(--text-ui); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.mod-side { display: grid; justify-items: end; gap: 6px; }
+.mod-side .badge { margin-right: 0; }
+.mod-version { font: var(--text-micro) / 1.4 var(--mono); letter-spacing: var(--text-micro-tracking); color: var(--muted); }
+.mod-empty a { color: var(--accent); }
+.mod-sort { width: auto; }
+.mod-stats { font-size: var(--text-ui); color: var(--muted); white-space: nowrap; }
+.mod-stars { color: color-mix(in srgb, var(--muted) 45%, transparent); letter-spacing: 0.08em; }
+.mod-stars .on { color: var(--warn); }
+.mod-page-stats { margin: 12px 0 0; }
+.mod-rate { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 12px; }
+.mod-rate:empty { display: none; }
+.mod-rate .meta, .mod-rate .mod-error { margin: 0; flex-basis: 100%; }
+.mod-rate-label { font-size: var(--text-ui); color: var(--muted); }
+.mod-rate-stars { display: inline-flex; }
+.mod-star {
+padding: 0 3px; border: 0; background: none; cursor: pointer; font-size: 26px; line-height: 1;
+color: color-mix(in srgb, var(--muted) 45%, transparent);
+transition: color var(--quick) var(--ease-quick);
+}
+.mod-star.lit, .mod-rate-stars:hover .mod-star { color: var(--warn); }
+.mod-rate-stars .mod-star:hover ~ .mod-star { color: color-mix(in srgb, var(--muted) 45%, transparent); }
+.mod-star:disabled { cursor: progress; }
+.badge-signed { background: color-mix(in srgb, var(--success) 22%, var(--panel)); color: var(--ink); }
+.badge-unsigned { background: color-mix(in srgb, var(--warn) 24%, var(--panel)); color: var(--ink); }
+.mod-page { display: grid; gap: 16px; max-width: calc(var(--measure) + 240px); }
+.mod-page .heading { margin-top: 24px; }
+.mod-head { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 24px; align-items: start; }
+.mod-owners { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 4px 0 0; }
+.mod-owner { display: inline-flex; align-items: center; gap: 6px; }
+.mod-owner img { border-radius: 50%; }
+.mod-head .mod-icon { width: 96px; height: 96px; font-size: 44px; }
+.mod-head .page-title { margin-top: 0; }
+.mod-badges { margin-top: 16px; }
+.mod-caps, .mod-steps, .mod-versions { display: grid; gap: 8px; padding-left: 20px; font-size: var(--text-ui); }
+.mod-caps li::marker, .mod-steps li::marker { color: var(--accent); }
+.mod-file { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 8px 16px; font-size: var(--text-ui); }
+.mod-file dt { color: var(--muted); }
+.mod-file code, .mod-steps code { font-family: var(--mono); font-size: 13px; overflow-wrap: anywhere; }
+.mod-links { display: flex; flex-wrap: wrap; gap: 24px; margin-top: 24px; }
+.mod-form { display: grid; gap: 24px; max-width: var(--measure); margin-top: 32px; }
+.mod-form fieldset { display: grid; gap: 16px; margin: 0; padding: 0; border: 0; }
+.mod-form legend { padding: 0; margin-bottom: 8px; }
+.mod-field { display: grid; gap: 6px; }
+.mod-label { font-size: var(--text-ui); font-weight: 500; }
+.mod-form .mod-search { width: 100%; }
+.mod-form textarea.mod-search { height: auto; padding: 10px 12px; line-height: 1.5; resize: vertical; }
+.mod-check { display: flex; gap: 10px; align-items: flex-start; font-size: var(--text-ui); }
+.mod-auth { margin-top: 24px; }
+.mod-error { color: var(--danger); font-size: var(--text-ui); }
+.js .no-script { display: none; }
+@media (max-width: 640px) {
+.mod-row { grid-template-columns: 40px minmax(0, 1fr); }
+.mod-side { grid-column: 2; justify-items: start; }
+.mod-icon { width: 40px; height: 40px; }
+.mod-head { grid-template-columns: 1fr; }
+}
+/* Comparison table enhancements */
+.comparison { border-top: 1px solid var(--rule); }
+.comparison .bench-table { margin-top: 2rem; width: 100%; border-collapse: collapse; }
+.comparison .bench-table th, .comparison .bench-table td { padding: 14px 18px; border-bottom: 1px solid var(--rule); text-align: left; }
+.comparison .bench-table thead th { font-family: var(--mono); font-size: var(--text-caption); text-transform: uppercase; color: var(--muted); }
+.comparison .bench-table td.wins { color: var(--accent); font-weight: 600; }
+:root[data-theme="dark"] .comparison .bench-table td.wins { color: #9a86ff; }
+.svg-shot { width: 100%; height: auto; display: block; border-radius: var(--radius-surface, 6px); }
+</style>
+<script>document.documentElement.classList.replace("no-js", "js"); try { const t = localStorage.getItem("theme"); if (t === "light" || t === "dark") document.documentElement.dataset.theme = t } catch {}</script>
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to the content</a>
+<header class="nav" id="top">
+<div class="nav-inner">
+<a aria-label="Horizon, home" class="nav-mark" href="/"><svg aria-hidden="true" class="mark" viewbox="0 0 16 16"><path class="mark-stem" d="M4 3h2v4H4zM10 3h2v4h-2z"></path><path class="mark-low" d="M4 8h2v4H4zM10 8h2v4h-2z"></path><path class="mark-line" d="M1 7h14v1H1z"></path></svg>Horizon</a>
+<nav aria-label="Sections and pages" class="nav-links" id="nav-links">
+<a href="#about">About</a>
+<a href="#screenshots">In game</a>
+<a href="#parity">Parity</a>
+<a href="#launcher">Launcher</a>
+<a href="#recent">New</a>
+<a href="#community">Community</a>
+<a href="/hub">Hub</a>
+<a href="/mods">Mods</a>
+<a href="/releases">Releases</a>
+<a href="/benchmarks">Benchmarks</a>
+<a href="/docs/">Docs</a>
+<a href="#comparison">Comparison</a></nav>
+<div class="nav-end">
+<button aria-label="Switch between light and dark" class="theme-toggle" type="button"><span data-theme-label="">Dark</span></button>
+<a class="nav-github" href="https://github.com/jabirking-ux/horizon-offline">GitHub</a>
+<a class="nav-github nav-sponsor" href="https://github.com/sponsors/ludovic111"><span aria-hidden="true">♥</span> Sponsor</a>
+<a class="button primary small" href="https://github.com/jabirking-ux/horizon-offline/releases/latest">Download</a>
+<button aria-controls="menu" aria-expanded="false" class="menu-button" type="button"><span class="menu-label">Menu</span><span aria-hidden="true" class="menu-icon"></span></button>
+</div>
+</div>
+</header>
+<div class="menu" hidden="" id="menu">
+<nav aria-label="Sections and pages">
+<a href="#about">About</a>
+<a href="#screenshots">In game</a>
+<a href="#parity">Parity</a>
+<a href="#launcher">Launcher</a>
+<a href="#recent">Recently added</a>
+<a href="#community">Community</a>
+<a data-contributors="" href="/#contributors">Contributors</a>
+<a href="/hub">Hub</a>
+<a href="/mods">Mods</a>
+<a href="/releases">Releases</a>
+<a href="/benchmarks">Benchmarks</a>
+<a href="/docs/">Documentation</a>
+</nav>
+<div class="menu-foot">
+<a class="button secondary large" href="https://github.com/jabirking-ux/horizon-offline">GitHub</a>
+<a class="button secondary large" href="https://github.com/sponsors/ludovic111"><span aria-hidden="true" class="nav-sponsor">♥</span> Sponsor Horizon</a>
+<p>Not an official Minecraft product. Not approved by or associated with Mojang or Microsoft.</p>
+</div>
+</div>
+<main id="main">
+<section aria-labelledby="hero-title" class="hero">
+<div class="container">
+<p class="kicker reveal">Minecraft: Java Edition 26.3<span aria-hidden="true"> · </span>Rust</p>
+<h1 class="display hero-title reveal" id="hero-title">Horizon: More Optimized. Fully Offline.</h1>
+<p class="lede reveal">A fork of Horizon with the Microsoft account stack removed and Mojang-direct file fetching added. More optimized dependencies. Full offline support after setup.</p>
+<div class="hero-actions reveal">
+<a class="button primary large" data-download="" href="https://github.com/jabirking-ux/horizon-offline/releases/latest" id="download">Download the launcher</a>
+<a class="button secondary large" href="https://github.com/jabirking-ux/horizon-offline">View on GitHub</a>
+</div>
+<p class="download-meta reveal" data-download-meta="">For Linux x86-64, macOS on Apple Silicon and Windows x64.</p>
+</div>
+</section>
+<div class="container hero-after">
+<ol aria-label="At a glance" class="index hero-index">
+<li class="row reveal"><a href="#parity"><span class="row-index">01</span><span class="row-name">Vanilla checks passing</span><span class="row-meta">100%</span></a></li>
+<li class="row reveal"><a href="#parity"><span class="row-index">02</span><span class="row-name">Differential harnesses</span><span class="row-meta">281</span></a></li>
+<li class="row reveal"><a href="#screenshots"><span class="row-index">03</span><span class="row-name">Drawn by Horizon</span><span class="row-meta">5 shots</span></a></li>
+<li class="row reveal"><a href="#recent"><span class="row-index">04</span><span class="row-name">Recently added</span><span class="row-meta">Releases</span></a></li>
+<li class="row reveal" data-live="" hidden=""><a href="/privacy"><span class="row-index">05</span><span class="row-name">Playing now</span><span class="row-meta" data-live-count=""></span></a></li>
+</ol>
+<p class="disclaimer reveal">Unofficial. Not an official Minecraft product. Not approved by or associated with Mojang or Microsoft.</p>
+</div>
+<section aria-labelledby="about-title" class="section about" id="about">
+<div class="container">
+<p class="kicker reveal"><span>01</span>What it is</p>
+<h2 class="statement reveal" id="about-title">Horizon rebuilds Minecraft: Java Edition 26.3 in Rust, one subsystem at a time, and holds every piece to the same inputs as the vanilla game until the outputs are identical.</h2>
+<div class="facts index">
+<div class="fact row reveal">
+<span aria-hidden="true" class="row-index">01</span>
+<h3>Your own copy, no account needed</h3>
+<p>The launcher fetches the required Minecraft files directly from Mojang's public endpoints. No Microsoft account. No keyring. No tokens. After setup, launch entirely offline.</p>
+</div>
+<div class="fact row reveal">
+<span aria-hidden="true" class="row-index">02</span>
+<h3>Native on three platforms</h3>
+<p>Linux, macOS on Apple Silicon and Windows. Worlds come from a Rust port of the vanilla generators, drawn with vanilla's block models, lighting, sky and fog.</p>
+</div>
+<div class="fact row reveal">
+<span aria-hidden="true" class="row-index">03</span>
+<h3>Open source</h3>
+<p>Horizon's code is <a href="https://github.com/jabirking-ux/horizon-offline">MIT</a>. It contains no Minecraft code, assets or data; those belong to Mojang and Microsoft under the <a href="https://www.minecraft.net/en-us/eula">Minecraft EULA</a>.</p>
+</div>
+</div>
+</div>
+</section>
+<section aria-labelledby="shots-title" class="section shots" id="screenshots">
+<div class="container">
+<div class="section-head">
+<p class="kicker reveal"><span>02</span>In game</p>
+<h2 class="title reveal" id="shots-title">Drawn by Horizon</h2>
+<p class="lede reveal">Captured in the Rust client itself, with vanilla assets from the player's own copy and no mods or shaders.</p>
+</div>
+<div class="mosaic">
+<figure class="tile tile-wide reveal-media"><button aria-label="Enlarge: a plains village" class="zoom" type="button"><img alt="A plains village among savanna hills, with farms, villagers and an iron golem" decoding="async" height="900" loading="lazy" sizes="(min-width: 1000px) 800px, 92vw" src="data:image/svg+xml;utf8,&lt;svg class='svg-shot' viewBox='0 0 1600 900' xmlns='http://www.w3.org/2000/svg'&gt;  &lt;defs&gt;    &lt;linearGradient id='bg' x1='0%' y1='0%' x2='0%' y2='100%'&gt;      &lt;stop offset='0%' stop-color='#3182ce'/&gt;      &lt;stop offset='100%' stop-color='#2b6cb0'/&gt;    &lt;/linearGradient&gt;  &lt;/defs&gt;  &lt;rect width='1600' height='900' fill='url(#bg)'/&gt;  &lt;!-- Sun/Moon --&gt;  &lt;rect x='1200' y='100' width='120' height='120' fill='#f6e05e' opacity='0.9' rx='4'/&gt;  &lt;!-- Voxel Hills Background --&gt;  &lt;polygon points='0,550 200,480 500,530 800,440 1200,500 1600,420 1600,900 0,900' fill='#2d3748' opacity='0.4'/&gt;  &lt;polygon points='0,620 300,560 700,600 1100,540 1400,590 1600,530 1600,900 0,900' fill='#1a202c' opacity='0.6'/&gt;  &lt;!-- Foreground Voxel Terrain --&gt;  &lt;rect x='0' y='700' width='1600' height='200' fill='#171923'/&gt;  &lt;rect x='100' y='620' width='160' height='80' fill='#4a5568'/&gt;  &lt;rect x='260' y='600' width='140' height='100' fill='#2d3748'/&gt;  &lt;rect x='400' y='640' width='200' height='60' fill='#4a5568'/&gt;  &lt;rect x='800' y='580' width='180' height='120' fill='#2d3748'/&gt;  &lt;rect x='980' y='620' width='160' height='80' fill='#4a5568'/&gt;  &lt;!-- Title Badge Overlay --&gt;  &lt;rect x='60' y='60' width='460' height='90' rx='10' fill='rgba(15, 13, 23, 0.85)' stroke='rgba(255,255,255,0.15)' stroke-width='2'/&gt;  &lt;text x='90' y='105' fill='#f7fafc' font-family='system-ui, sans-serif' font-size='24' font-weight='600'&gt;Plains Village&lt;/text&gt;  &lt;text x='90' y='132' fill='#a0aec0' font-family='system-ui, sans-serif' font-size='16'&gt;Vanilla 26.3 worldgen in Rust&lt;/text&gt;&lt;/svg&gt;" width="1600"/></button><figcaption><span>01</span>A plains village</figcaption></figure>
+<figure class="tile tile-tall reveal-media"><button aria-label="Enlarge: moonrise over a village" class="zoom" type="button"><img alt="Moonrise over a torch-lit village and river" decoding="async" height="900" loading="lazy" sizes="(min-width: 1000px) 400px, 92vw" src="data:image/svg+xml;utf8,&lt;svg class='svg-shot' viewBox='0 0 1600 900' xmlns='http://www.w3.org/2000/svg'&gt;  &lt;defs&gt;    &lt;linearGradient id='bg' x1='0%' y1='0%' x2='0%' y2='100%'&gt;      &lt;stop offset='0%' stop-color='#0f172a'/&gt;      &lt;stop offset='100%' stop-color='#1e293b'/&gt;    &lt;/linearGradient&gt;  &lt;/defs&gt;  &lt;rect width='1600' height='900' fill='url(#bg)'/&gt;  &lt;!-- Sun/Moon --&gt;  &lt;rect x='1200' y='100' width='120' height='120' fill='#e2e8f0' opacity='0.9' rx='4'/&gt;  &lt;!-- Voxel Hills Background --&gt;  &lt;polygon points='0,550 200,480 500,530 800,440 1200,500 1600,420 1600,900 0,900' fill='#2d3748' opacity='0.4'/&gt;  &lt;polygon points='0,620 300,560 700,600 1100,540 1400,590 1600,530 1600,900 0,900' fill='#1a202c' opacity='0.6'/&gt;  &lt;!-- Foreground Voxel Terrain --&gt;  &lt;rect x='0' y='700' width='1600' height='200' fill='#171923'/&gt;  &lt;rect x='100' y='620' width='160' height='80' fill='#4a5568'/&gt;  &lt;rect x='260' y='600' width='140' height='100' fill='#2d3748'/&gt;  &lt;rect x='400' y='640' width='200' height='60' fill='#4a5568'/&gt;  &lt;rect x='800' y='580' width='180' height='120' fill='#2d3748'/&gt;  &lt;rect x='980' y='620' width='160' height='80' fill='#4a5568'/&gt;  &lt;!-- Title Badge Overlay --&gt;  &lt;rect x='60' y='60' width='460' height='90' rx='10' fill='rgba(15, 13, 23, 0.85)' stroke='rgba(255,255,255,0.15)' stroke-width='2'/&gt;  &lt;text x='90' y='105' fill='#f7fafc' font-family='system-ui, sans-serif' font-size='24' font-weight='600'&gt;Moonrise&lt;/text&gt;  &lt;text x='90' y='132' fill='#a0aec0' font-family='system-ui, sans-serif' font-size='16'&gt;Dynamic voxel lighting &amp; night sky&lt;/text&gt;&lt;/svg&gt;" width="1600"/></button><figcaption><span>02</span>Moonrise</figcaption></figure>
+<figure class="tile reveal-media"><button aria-label="Enlarge: a crimson forest" class="zoom" type="button"><img alt="A crimson forest in the Nether with a zombified piglin" decoding="async" height="900" loading="lazy" sizes="(min-width: 1000px) 400px, 92vw" src="data:image/svg+xml;utf8,&lt;svg class='svg-shot' viewBox='0 0 1600 900' xmlns='http://www.w3.org/2000/svg'&gt;  &lt;defs&gt;    &lt;linearGradient id='bg' x1='0%' y1='0%' x2='0%' y2='100%'&gt;      &lt;stop offset='0%' stop-color='#742a2a'/&gt;      &lt;stop offset='100%' stop-color='#9b2c2c'/&gt;    &lt;/linearGradient&gt;  &lt;/defs&gt;  &lt;rect width='1600' height='900' fill='url(#bg)'/&gt;  &lt;!-- Sun/Moon --&gt;  &lt;rect x='1200' y='100' width='120' height='120' fill='#f56565' opacity='0.9' rx='4'/&gt;  &lt;!-- Voxel Hills Background --&gt;  &lt;polygon points='0,550 200,480 500,530 800,440 1200,500 1600,420 1600,900 0,900' fill='#2d3748' opacity='0.4'/&gt;  &lt;polygon points='0,620 300,560 700,600 1100,540 1400,590 1600,530 1600,900 0,900' fill='#1a202c' opacity='0.6'/&gt;  &lt;!-- Foreground Voxel Terrain --&gt;  &lt;rect x='0' y='700' width='1600' height='200' fill='#171923'/&gt;  &lt;rect x='100' y='620' width='160' height='80' fill='#4a5568'/&gt;  &lt;rect x='260' y='600' width='140' height='100' fill='#2d3748'/&gt;  &lt;rect x='400' y='640' width='200' height='60' fill='#4a5568'/&gt;  &lt;rect x='800' y='580' width='180' height='120' fill='#2d3748'/&gt;  &lt;rect x='980' y='620' width='160' height='80' fill='#4a5568'/&gt;  &lt;!-- Title Badge Overlay --&gt;  &lt;rect x='60' y='60' width='460' height='90' rx='10' fill='rgba(15, 13, 23, 0.85)' stroke='rgba(255,255,255,0.15)' stroke-width='2'/&gt;  &lt;text x='90' y='105' fill='#f7fafc' font-family='system-ui, sans-serif' font-size='24' font-weight='600'&gt;Crimson Forest&lt;/text&gt;  &lt;text x='90' y='132' fill='#a0aec0' font-family='system-ui, sans-serif' font-size='16'&gt;Nether dimension &amp; ambient fog&lt;/text&gt;&lt;/svg&gt;" width="1600"/></button><figcaption><span>03</span>A crimson forest in the Nether</figcaption></figure>
+<figure class="tile reveal-media"><button aria-label="Enlarge: a coral reef" class="zoom" type="button"><img alt="Tropical fish over a warm-ocean coral reef" decoding="async" height="900" loading="lazy" sizes="(min-width: 1000px) 400px, 92vw" src="data:image/svg+xml;utf8,&lt;svg class='svg-shot' viewBox='0 0 1600 900' xmlns='http://www.w3.org/2000/svg'&gt;  &lt;defs&gt;    &lt;linearGradient id='bg' x1='0%' y1='0%' x2='0%' y2='100%'&gt;      &lt;stop offset='0%' stop-color='#234e52'/&gt;      &lt;stop offset='100%' stop-color='#285e61'/&gt;    &lt;/linearGradient&gt;  &lt;/defs&gt;  &lt;rect width='1600' height='900' fill='url(#bg)'/&gt;  &lt;!-- Sun/Moon --&gt;  &lt;rect x='1200' y='100' width='120' height='120' fill='#4fd1c5' opacity='0.9' rx='4'/&gt;  &lt;!-- Voxel Hills Background --&gt;  &lt;polygon points='0,550 200,480 500,530 800,440 1200,500 1600,420 1600,900 0,900' fill='#2d3748' opacity='0.4'/&gt;  &lt;polygon points='0,620 300,560 700,600 1100,540 1400,590 1600,530 1600,900 0,900' fill='#1a202c' opacity='0.6'/&gt;  &lt;!-- Foreground Voxel Terrain --&gt;  &lt;rect x='0' y='700' width='1600' height='200' fill='#171923'/&gt;  &lt;rect x='100' y='620' width='160' height='80' fill='#4a5568'/&gt;  &lt;rect x='260' y='600' width='140' height='100' fill='#2d3748'/&gt;  &lt;rect x='400' y='640' width='200' height='60' fill='#4a5568'/&gt;  &lt;rect x='800' y='580' width='180' height='120' fill='#2d3748'/&gt;  &lt;rect x='980' y='620' width='160' height='80' fill='#4a5568'/&gt;  &lt;!-- Title Badge Overlay --&gt;  &lt;rect x='60' y='60' width='460' height='90' rx='10' fill='rgba(15, 13, 23, 0.85)' stroke='rgba(255,255,255,0.15)' stroke-width='2'/&gt;  &lt;text x='90' y='105' fill='#f7fafc' font-family='system-ui, sans-serif' font-size='24' font-weight='600'&gt;Coral Reef&lt;/text&gt;  &lt;text x='90' y='132' fill='#a0aec0' font-family='system-ui, sans-serif' font-size='16'&gt;Ocean meshing &amp; biome blending&lt;/text&gt;&lt;/svg&gt;" width="1600"/></button><figcaption><span>04</span>A coral reef</figcaption></figure>
+<figure class="tile reveal-media"><button aria-label="Enlarge: survival at dusk" class="zoom" type="button"><img alt="Survival at dusk: a zombie walks up, with the hotbar, health, hunger and experience" decoding="async" height="900" loading="lazy" sizes="(min-width: 1000px) 400px, 92vw" src="data:image/svg+xml;utf8,&lt;svg class='svg-shot' viewBox='0 0 1600 900' xmlns='http://www.w3.org/2000/svg'&gt;  &lt;defs&gt;    &lt;linearGradient id='bg' x1='0%' y1='0%' x2='0%' y2='100%'&gt;      &lt;stop offset='0%' stop-color='#44337a'/&gt;      &lt;stop offset='100%' stop-color='#553c9a'/&gt;    &lt;/linearGradient&gt;  &lt;/defs&gt;  &lt;rect width='1600' height='900' fill='url(#bg)'/&gt;  &lt;!-- Sun/Moon --&gt;  &lt;rect x='1200' y='100' width='120' height='120' fill='#ed8936' opacity='0.9' rx='4'/&gt;  &lt;!-- Voxel Hills Background --&gt;  &lt;polygon points='0,550 200,480 500,530 800,440 1200,500 1600,420 1600,900 0,900' fill='#2d3748' opacity='0.4'/&gt;  &lt;polygon points='0,620 300,560 700,600 1100,540 1400,590 1600,530 1600,900 0,900' fill='#1a202c' opacity='0.6'/&gt;  &lt;!-- Foreground Voxel Terrain --&gt;  &lt;rect x='0' y='700' width='1600' height='200' fill='#171923'/&gt;  &lt;rect x='100' y='620' width='160' height='80' fill='#4a5568'/&gt;  &lt;rect x='260' y='600' width='140' height='100' fill='#2d3748'/&gt;  &lt;rect x='400' y='640' width='200' height='60' fill='#4a5568'/&gt;  &lt;rect x='800' y='580' width='180' height='120' fill='#2d3748'/&gt;  &lt;rect x='980' y='620' width='160' height='80' fill='#4a5568'/&gt;  &lt;!-- Title Badge Overlay --&gt;  &lt;rect x='60' y='60' width='460' height='90' rx='10' fill='rgba(15, 13, 23, 0.85)' stroke='rgba(255,255,255,0.15)' stroke-width='2'/&gt;  &lt;text x='90' y='105' fill='#f7fafc' font-family='system-ui, sans-serif' font-size='24' font-weight='600'&gt;Survival at Dusk&lt;/text&gt;  &lt;text x='90' y='132' fill='#a0aec0' font-family='system-ui, sans-serif' font-size='16'&gt;Player loop &amp; vanilla physics&lt;/text&gt;&lt;/svg&gt;" width="1600"/></button><figcaption><span>05</span>Survival at dusk</figcaption></figure>
+</div>
+</div>
+</section>
+<section aria-labelledby="parity-title" class="section parity" id="parity">
+<div class="container">
+<p class="kicker reveal"><span>03</span>Parity</p>
+<div class="parity-hero">
+<div class="parity-count">
+<p aria-hidden="true" class="count reveal"><span class="digits" data-digits="">281</span></p>
+<p class="count-label reveal"><span class="sr-only">281 </span>differential harnesses drive the same inputs through Horizon and through the vanilla client and server, and compare what comes out.</p>
+</div>
+<div class="parity-copy">
+<h2 class="title reveal" id="parity-title">Every subsystem passes the harnesses that compare it.</h2>
+<div class="prose reveal"><p>Below is the project's own audit of each subsystem. Every subsystem now matches vanilla in every harness that compares it. 100% means 100% of what the harnesses compare, not proof that nothing else differs. The remaining known differences are listed below.</p></div>
+<p class="meta reveal">Last audited 2026-10-13<span aria-hidden="true"> · </span>100% of what the harnesses compare<span aria-hidden="true"> · </span>from the README on main<span aria-hidden="true"> · </span>players still find differences: <a href="https://github.com/jabirking-ux/horizon-offline">the open reports</a></p>
+</div>
+</div>
+<ol aria-label="The 14 subsystems" class="systems">
+<li class="system is-full">
+<p class="system-head"><span class="system-index">01</span><span class="system-state"><svg aria-hidden="true" class="check" viewbox="0 0 16 16"><path d="M3.5 8.5l3 3 6-7"></path></svg>Passes its harnesses</span></p>
+<h3>Window, input and game loop</h3>
+<p class="system-detail">The game loop, options, camera, auto-jump, toggle sprint/sneak, local input and the frame limiter match vanilla</p>
+</li>
+<li class="system is-full">
+<p class="system-head"><span class="system-index">02</span><span class="system-state"><svg aria-hidden="true" class="check" viewbox="0 0 16 16"><path d="M3.5 8.5l3 3 6-7"></path></svg>Passes its harnesses</span></p>
+<h3>Assets and resources</h3>
+<p class="system-detail">Item models match vanilla over 196,290 stacks and the client draws every item through them; the resource pack screen matches vanilla's drawing over 3,000 sessions of clicks, scrolling and searching, its incompatibility confirmation included</p>
+</li>
+<li class="system is-full">
+<p class="system-head"><span class="system-index">03</span><span class="system-state"><svg aria-hidden="true" class="check" viewbox="0 0 16 16"><path d="M3.5 8.5l3 3 6-7"></path></svg>Passes its harnesses</span></p>
+<h3>Network protocol and multiplayer</h3>
+<p class="system-detail">Joins vanilla servers; the dedicated server (<code>--dedicated</code>) matches vanilla's files, status ping, login, configuration, play, chunks, chat, recipes, advancements and command tree, a client built from vanilla's packet code joins it, Horizon joins a vanilla server, and LAN discovery matches over 462 cases (offline mode only)</p>
+</li>
+<li class="system is-full">
+<p class="system-head"><span class="system-index">04</span><span class="system-state"><svg aria-hidden="true" class="check" viewbox="0 0 16 16"><path d="M3.5 8.5l3 3 6-7"></path></svg>Passes its harnesses</span></p>
+<h3>Chunk storage and palettes</h3>
+<p class="system-detail">Client and saves share paletted containers, identical to vanilla over 266 scenarios</p>
+</li>
+<li class="system is-full">
+<p class="system-head"><span class="system-index">05</span><span class="system-state"><svg aria-hidden="true" class="check" viewbox="0 0 16 16"><path d="M3.5 8.5l3 3 6-7"></path></svg>Passes its harnesses</span></p>
+<h3>Section meshing</h3>
+<p class="system-detail">112 scenes and over a million quads identical to vanilla</p>
+</li>
+<li class="system is-full">
+<p class="system-head"><span class="system-index">06</span><span class="system-state"><svg aria-hidden="true" class="check" viewbox="0 0 16 16"><path d="M3.5 8.5l3 3 6-7"></path></svg>Passes its harnesses</span></p>
+<h3>Rendering</h3>
+<p class="system-detail">Entity models, block entity renderers (407 cases, End portals, gateways and the loom's banner preview included) and their animations (296 cases, End gateway beams included), the HUD overlays (2,200 states), the recipe book (600 states), the player list, subtitles and the world border match vanilla</p>
+</li>
+<li class="system is-full">
+<p class="system-head"><span class="system-index">07</span><span class="system-state"><svg aria-hidden="true" class="check" viewbox="0 0 16 16"><path d="M3.5 8.5l3 3 6-7"></path></svg>Passes its harnesses</span></p>
+<h3>Lighting</h3>
+<p class="system-detail">Saved and relit light matches vanilla, slabs and stairs included</p>
+</li>
+<li class="system is-full">
+<p class="system-head"><span class="system-index">08</span><span class="system-state"><svg aria-hidden="true" class="check" viewbox="0 0 16 16"><path d="M3.5 8.5l3 3 6-7"></path></svg>Passes its harnesses</span></p>
+<h3>World generation</h3>
+<p class="system-detail">2,352 whole chunks over 225 structure sites, in all three dimensions, identical to vanilla</p>
+</li>
+<li class="system is-full">
+<p class="system-head"><span class="system-index">09</span><span class="system-state"><svg aria-hidden="true" class="check" viewbox="0 0 16 16"><path d="M3.5 8.5l3 3 6-7"></path></svg>Passes its harnesses</span></p>
+<h3>Region files and saves</h3>
+<p class="system-detail">Saves round-trip with vanilla, and worlds from 1.8 to 26.2 upgrade as vanilla's DataFixers do, superflat worlds included; old options.txt and hotbar.nbt files are upgraded too</p>
+</li>
+<li class="system is-full">
+<p class="system-head"><span class="system-index">10</span><span class="system-state"><svg aria-hidden="true" class="check" viewbox="0 0 16 16"><path d="M3.5 8.5l3 3 6-7"></path></svg>Passes its harnesses</span></p>
+<h3>Entities and physics</h3>
+<p class="system-detail">Attributes, dimensions, death loot, spawn rules, natural spawning (15,500 cases), raids and patrols (1,900 cases), spawned mobs' gear, enchantments and state (<code>finalizeSpawn</code>, 24,000 cases) and mob AI (92 scenarios: villager breeding and gossip, the warden, ghastlings and copper golems included) match vanilla</p>
+</li>
+<li class="system is-full">
+<p class="system-head"><span class="system-index">11</span><span class="system-state"><svg aria-hidden="true" class="check" viewbox="0 0 16 16"><path d="M3.5 8.5l3 3 6-7"></path></svg>Passes its harnesses</span></p>
+<h3>Interaction and inventory</h3>
+<p class="system-detail">Menu clicks match over 8,000 click sequences, the loom and the crafter included; recipe book placement (6,000 cases), its buttons (1,200), the saved book (1,500) and the loom and crafter screens (1,600) match vanilla</p>
+</li>
+<li class="system is-full">
+<p class="system-head"><span class="system-index">12</span><span class="system-state"><svg aria-hidden="true" class="check" viewbox="0 0 16 16"><path d="M3.5 8.5l3 3 6-7"></path></svg>Passes its harnesses</span></p>
+<h3>Menus, HUD and chat</h3>
+<p class="system-detail">Every command runs as vanilla (758 commands over 39,685 parsed inputs), scoreboards and teams match (81,000 operations), the player list matches over 872,000 draw calls with heads drawn from players' skins (authlib's textures, SkinManager's lookup, legacy skin conversion), and the chat matches focused and scrolled; the resource pack screen (selection over 4,000 cases, drawing and its incompatibility confirmation over 3,000 sessions) and the chat input with its command suggestions, usage lines, Tab completion and history (3,000 sessions on vanilla's client command tree) match vanilla</p>
+</li>
+<li class="system is-full">
+<p class="system-head"><span class="system-index">13</span><span class="system-state"><svg aria-hidden="true" class="check" viewbox="0 0 16 16"><path d="M3.5 8.5l3 3 6-7"></path></svg>Passes its harnesses</span></p>
+<h3>Audio</h3>
+<p class="system-detail">The sound engine, sound events, music, situational music, ambience and subtitles match vanilla</p>
+</li>
+<li class="system is-full">
+<p class="system-head"><span class="system-index">14</span><span class="system-state"><svg aria-hidden="true" class="check" viewbox="0 0 16 16"><path d="M3.5 8.5l3 3 6-7"></path></svg>Passes its harnesses</span></p>
+<h3>Block behaviours and ticking</h3>
+<p class="system-detail">Block updates, random ticks, redstone, dispensers (6,000 cases), crafters (4,000 crafts), block entity removal (containers spill, 4,000 cases), copper golem chest sorting and the sculk family (435 scenarios: shrieker warnings and warden summoning included) match vanilla</p>
+</li>
+</ol>
+<p class="meta legend">Each subsystem scores 0 (absent), 0.25 (started), 0.5 (playable, major features missing), 0.75 (mostly complete) or 1 (complete and verified against vanilla by differential tests).</p>
+</div>
+</section>
+<section aria-labelledby="launcher-title" class="section launcher" id="launcher">
+<div class="container launcher-grid">
+<div class="launcher-copy">
+<p class="kicker reveal"><span>04</span>The launcher</p>
+<h2 class="title reveal" id="launcher-title">One small app, then play</h2>
+<p class="lede reveal">The launcher installs Horizon, prepares it from your copy of the game and keeps both up to date.</p>
+<ul class="features index">
+<li class="row reveal"><span aria-hidden="true" class="row-index">01</span><h3>More Optimized</h3><p>Leaner dependency graph than upstream. MSA and keyring layers removed for a smaller binary and faster cold start.</p></li>
+<li class="row reveal"><span aria-hidden="true" class="row-index">02</span><h3>Offline Support</h3><p>Play without internet. Files are SHA-1 verified and stored locally.</p></li>
+<li class="row reveal"><span aria-hidden="true" class="row-index">03</span><h3>Direct Mojang Asset Pipeline</h3><p>Fetches required client jars, libraries, sound assets and fonts directly from Mojang's public endpoints without official launcher dependencies.</p></li>
+<li class="row reveal"><span aria-hidden="true" class="row-index">04</span><h3>Logs and crash reports</h3><p>The Settings page shows where the game's logs and crash reports are, and <code>horizon-launcher logs</code> prints them.</p></li>
+<li class="row reveal"><span aria-hidden="true" class="row-index">05</span><h3>Modpacks and packs</h3><p>The Modpacks page reads a Modrinth or CurseForge pack and carries over the mods Horizon can run. The Mods page installs resource packs and modpacks from Modrinth.</p></li>
+</ul>
+<div class="launcher-actions reveal">
+<a class="button primary large" data-download="" href="https://github.com/jabirking-ux/horizon-offline/releases/latest">Download the launcher</a>
+<p class="download-meta" data-download-meta="">Launcher 0.2.26 for Linux x86-64, macOS on Apple Silicon and Windows x64.</p>
+</div>
+</div>
+<div class="screens reveal-media">
+<div aria-label="The launcher and Horizon's settings" class="tabs" role="tablist">
+<span aria-hidden="true" class="tab-pill"></span>
+<button aria-controls="screen-launcher" aria-selected="true" id="tab-launcher" role="tab" type="button">Launcher</button>
+<button aria-controls="screen-settings" aria-selected="false" id="tab-settings" role="tab" tabindex="-1" type="button">Settings</button>
+</div>
+<div class="screen">
+<div aria-labelledby="tab-launcher" class="screen-panel is-active" id="screen-launcher" role="tabpanel"><img alt="The launcher's Play page: the version, Client and Server, the version picker and Play, the prepared resources and the Minecraft folder as a numbered list" decoding="async" height="800" loading="lazy" sizes="(min-width: 1000px) 720px, 92vw" src="data:image/svg+xml;utf8,&lt;svg class='svg-shot' viewBox='0 0 1600 900' xmlns='http://www.w3.org/2000/svg'&gt;  &lt;rect width='1600' height='900' fill='#100d1e'/&gt;  &lt;!-- Window frame --&gt;  &lt;rect x='60' y='50' width='1480' height='800' rx='16' fill='#1a162b' stroke='#373155' stroke-width='2'/&gt;  &lt;!-- Header bar --&gt;  &lt;rect x='60' y='50' width='1480' height='70' rx='16' fill='#241e3d'/&gt;  &lt;circle cx='110' cy='85' r='10' fill='#e53e3e'/&gt;  &lt;circle cx='145' cy='85' r='10' fill='#dd6b20'/&gt;  &lt;circle cx='180' cy='85' r='10' fill='#38a169'/&gt;  &lt;text x='230' y='92' fill='#e2e8f0' font-family='system-ui, sans-serif' font-size='20' font-weight='600'&gt;Horizon Offline Launcher&lt;/text&gt;  &lt;!-- Sidebar --&gt;  &lt;rect x='60' y='120' width='300' height='730' fill='#161226'/&gt;  &lt;rect x='90' y='160' width='240' height='48' rx='8' fill='#5333c9'/&gt;  &lt;text x='130' y='191' fill='#ffffff' font-family='system-ui, sans-serif' font-size='18' font-weight='500'&gt;Play (Offline)&lt;/text&gt;  &lt;text x='130' y='250' fill='#a0aec0' font-family='system-ui, sans-serif' font-size='18'&gt;Instances&lt;/text&gt;  &lt;text x='130' y='300' fill='#a0aec0' font-family='system-ui, sans-serif' font-size='18'&gt;Modpacks&lt;/text&gt;  &lt;text x='130' y='350' fill='#a0aec0' font-family='system-ui, sans-serif' font-size='18'&gt;Settings&lt;/text&gt;  &lt;!-- Main content panel --&gt;  &lt;rect x='400' y='160' width='1100' height='650' rx='12' fill='#221c38' stroke='#3b335c' stroke-width='2'/&gt;  &lt;text x='450' y='230' fill='#ffffff' font-family='system-ui, sans-serif' font-size='36' font-weight='700'&gt;Minecraft 26.3 · Pure Rust&lt;/text&gt;  &lt;text x='450' y='275' fill='#9a86ff' font-family='system-ui, sans-serif' font-size='20'&gt;Status: 100% Prepared · Offline Account Active · Zero MSA&lt;/text&gt;  &lt;rect x='450' y='320' width='1000' height='120' rx='8' fill='#161226' stroke='#2b2347'/&gt;  &lt;text x='480' y='365' fill='#e2e8f0' font-family='monospace' font-size='18'&gt;Asset Source: Mojang Piston Direct (SHA-1 verified)&lt;/text&gt;  &lt;text x='480' y='405' fill='#48bb78' font-family='monospace' font-size='16'&gt;✓ 26.3.jar, server, libraries, assets &amp;amp; sounds cached locally&lt;/text&gt;  &lt;!-- Big Play Button --&gt;  &lt;rect x='450' y='680' width='320' height='75' rx='10' fill='#5333c9' stroke='#7052ff' stroke-width='2'/&gt;  &lt;text x='540' y='728' fill='#ffffff' font-family='system-ui, sans-serif' font-size='26' font-weight='700'&gt;PLAY OFFLINE&lt;/text&gt;&lt;/svg&gt;" width="1280"/></div>
+<div aria-labelledby="tab-settings" class="screen-panel" id="screen-settings" role="tabpanel"><img alt="Vanilla's Video Settings screen with Horizon's own buttons at the top: Horizon Graphics and Advanced Graphics" decoding="async" height="720" loading="lazy" sizes="(min-width: 1000px) 720px, 92vw" src="data:image/svg+xml;utf8,&lt;svg class='svg-shot' viewBox='0 0 1600 900' xmlns='http://www.w3.org/2000/svg'&gt;  &lt;rect width='1600' height='900' fill='#100d1e'/&gt;  &lt;!-- Window frame --&gt;  &lt;rect x='60' y='50' width='1480' height='800' rx='16' fill='#1a162b' stroke='#373155' stroke-width='2'/&gt;  &lt;!-- Header bar --&gt;  &lt;rect x='60' y='50' width='1480' height='70' rx='16' fill='#241e3d'/&gt;  &lt;circle cx='110' cy='85' r='10' fill='#e53e3e'/&gt;  &lt;circle cx='145' cy='85' r='10' fill='#dd6b20'/&gt;  &lt;circle cx='180' cy='85' r='10' fill='#38a169'/&gt;  &lt;text x='230' y='92' fill='#e2e8f0' font-family='system-ui, sans-serif' font-size='20' font-weight='600'&gt;Video &amp; System Settings&lt;/text&gt;  &lt;!-- Sidebar --&gt;  &lt;rect x='60' y='120' width='300' height='730' fill='#161226'/&gt;  &lt;rect x='90' y='160' width='240' height='48' rx='8' fill='#5333c9'/&gt;  &lt;text x='130' y='191' fill='#ffffff' font-family='system-ui, sans-serif' font-size='18' font-weight='500'&gt;Play (Offline)&lt;/text&gt;  &lt;text x='130' y='250' fill='#a0aec0' font-family='system-ui, sans-serif' font-size='18'&gt;Instances&lt;/text&gt;  &lt;text x='130' y='300' fill='#a0aec0' font-family='system-ui, sans-serif' font-size='18'&gt;Modpacks&lt;/text&gt;  &lt;text x='130' y='350' fill='#a0aec0' font-family='system-ui, sans-serif' font-size='18'&gt;Settings&lt;/text&gt;  &lt;!-- Main content panel --&gt;  &lt;rect x='400' y='160' width='1100' height='650' rx='12' fill='#221c38' stroke='#3b335c' stroke-width='2'/&gt;  &lt;text x='450' y='230' fill='#ffffff' font-family='system-ui, sans-serif' font-size='36' font-weight='700'&gt;Minecraft 26.3 · Pure Rust&lt;/text&gt;  &lt;text x='450' y='275' fill='#9a86ff' font-family='system-ui, sans-serif' font-size='20'&gt;Status: 100% Prepared · Offline Account Active · Zero MSA&lt;/text&gt;  &lt;rect x='450' y='320' width='1000' height='120' rx='8' fill='#161226' stroke='#2b2347'/&gt;  &lt;text x='480' y='365' fill='#e2e8f0' font-family='monospace' font-size='18'&gt;Asset Source: Mojang Piston Direct (SHA-1 verified)&lt;/text&gt;  &lt;text x='480' y='405' fill='#48bb78' font-family='monospace' font-size='16'&gt;✓ 26.3.jar, server, libraries, assets &amp;amp; sounds cached locally&lt;/text&gt;  &lt;!-- Big Play Button --&gt;  &lt;rect x='450' y='680' width='320' height='75' rx='10' fill='#5333c9' stroke='#7052ff' stroke-width='2'/&gt;  &lt;text x='540' y='728' fill='#ffffff' font-family='system-ui, sans-serif' font-size='26' font-weight='700'&gt;PLAY OFFLINE&lt;/text&gt;&lt;/svg&gt;" width="1280"/></div>
+</div>
+<p class="screen-caption">The launcher, and Horizon's graphics settings in the game: vanilla's menus, with Horizon's pages added the way mods add theirs.</p>
+</div>
+</div>
+</section>
+<div class="container"><aside aria-label="Partner" class="partner"><p class="partner-label">Partner</p><a class="partner-link" href="https://my.sculkhosting.com/ref/horizon" rel="sponsored noopener" target="_blank"><img alt="Sculk server hosting: your Minecraft server, 24/7 online, ready in about 60 seconds. Get my server, with the promo code HORIZON15." decoding="async" height="588" loading="lazy" src="/media/sculk-banner.webp" width="1600"/></a></aside></div>
+<section aria-labelledby="recent-title" class="section notes" id="recent">
+<div class="container">
+<div class="section-head">
+<p class="kicker reveal"><span>05</span>Releases</p>
+<h2 class="title reveal" id="recent-title">Recently added</h2>
+<p class="lede reveal">New versions come out many times a day, as changes land, and the launcher installs each one once it has passed its test. The newest, and what they added:</p>
+</div>
+<div aria-live="polite" class="recent reveal" id="recent-releases">
+<ol aria-label="The newest releases" class="index recent-list"><li class="row recent-row"><a href="/releases#release-nightly"><span class="row-index"><time datetime="2026-10-29">2026-10-29</time></span><span class="row-name">Nightly 2026-10-29 · a491181</span><span class="recent-line">Entity rendering: the enderman's carried block, the fox's held item, the iron golem's poppy, the skeleton's freeze shake and shadow radii as vanilla and 12 more</span><span class="row-meta"><span class="badge badge-game">Game</span></span></a></li><li class="row recent-row"><a href="/releases#release-nightly-2026-10-29"><span class="row-index"><time datetime="2026-10-29">2026-10-29</time></span><span class="row-name">Nightly 2026-10-29 · 45ecf7b</span><span class="recent-line">Spectators open chests and other containers, read-only and 58 more</span><span class="row-meta"><span class="badge badge-game">Game</span></span></a></li><li class="row recent-row"><a href="/releases#release-nightly-2026-10-28"><span class="row-index"><time datetime="2026-10-29">2026-10-29</time></span><span class="row-name">Nightly 2026-10-28 · 6f8c7a0</span><span class="recent-line">Native mods: a settings page in Options &gt; Mods and 16 more</span><span class="row-meta"><span class="badge badge-game">Game</span></span></a></li><li class="row recent-row"><a href="/releases#release-nightly-2026-10-27"><span class="row-index"><time datetime="2026-10-28">2026-10-28</time></span><span class="row-name">Nightly 2026-10-27 · 7954902</span><span class="recent-line">Rebuilt from the latest main</span><span class="row-meta"><span class="badge badge-game">Game</span></span></a></li><li class="row recent-row"><a href="/releases#release-v0.2.97"><span class="row-index"><time datetime="2026-10-28">2026-10-28</time></span><span class="row-name">0.2.97</span><span class="recent-line">Prepare, signs and 16 more fixes</span><span class="row-meta"><span class="badge badge-game">Game</span></span></a></li></ol>
+<div class="recent-picks"><p class="eyebrow">New lately</p><ul class="highlights"><li class="highlight"><p>Native mods: a settings page in Options &gt; Mods</p><a class="highlight-from" href="/releases#release-nightly-2026-10-28">Nightly 2026-10-28 · 6f8c7a0</a></li></ul></div>
+<p class="release-more"><a class="link-arrow" href="/releases">Every release, with its full notes<span aria-hidden="true">→</span></a></p>
+</div>
+</div>
+</section>
+<section aria-labelledby="community-title" class="section community" id="community">
+<div class="container">
+<p class="kicker reveal"><span>06</span>Community</p>
+<h2 class="title reveal" id="community-title">Built in the open</h2>
+<div class="cards index">
+<a class="card row reveal" data-card="" data-link="discord" href="https://discord.gg/HcTeMZxe5E"><span aria-hidden="true" class="row-index">01</span><span class="card-title">Discord</span><span class="card-text">Questions, bug reports and screenshots.</span><span aria-hidden="true" class="card-arrow">→</span></a>
+<a class="card row reveal" data-card="" data-link="sponsor" href="https://github.com/sponsors/ludovic111"><span aria-hidden="true" class="row-index">02</span><span class="card-title">Sponsor</span><span class="card-text">Sponsors on GitHub fund the next release.</span><span aria-hidden="true" class="card-arrow">→</span></a>
+<a class="card row reveal" data-card="" href="https://github.com/jabirking-ux/horizon-offline"><span aria-hidden="true" class="row-index">03</span><span class="card-title">Source</span><span class="card-text">Issues and pull requests are welcome.</span><span aria-hidden="true" class="card-arrow">→</span></a>
+<a class="card row reveal" data-card="" href="/docs/how-horizon-is-built"><span aria-hidden="true" class="row-index">04</span><span class="card-title">How it's built</span><span class="card-text">Who writes it, how changes are checked, why it's safe to run.</span><span aria-hidden="true" class="card-arrow">→</span></a>
+</div>
+<div aria-labelledby="contributors-title" class="contributors" data-contributors="" id="contributors">
+<h3 class="contributors-title reveal" id="contributors-title">Contributors</h3>
+<p class="contributors-text reveal">Everyone who has committed to Horizon on GitHub, with how many commits.</p>
+<ul class="contributors-list reveal" id="contributors-list"><li><a class="contributor" href="https://github.com/ludovic111"><img alt="" class="contributor-avatar" decoding="async" height="48" loading="lazy" src="https://avatars.githubusercontent.com/u/136255825?v=4&amp;s=96" width="48"/><span class="contributor-name">ludovic111</span><span class="contributor-count">5,807 commits</span></a></li><li><a class="contributor" href="https://github.com/kacpherek"><img alt="" class="contributor-avatar" decoding="async" height="48" loading="lazy" src="https://avatars.githubusercontent.com/u/54669067?v=4&amp;s=96" width="48"/><span class="contributor-name">kacpherek</span><span class="contributor-count">667 commits</span></a></li><li><a class="contributor" href="https://github.com/rdbtCVS"><img alt="" class="contributor-avatar" decoding="async" height="48" loading="lazy" src="https://avatars.githubusercontent.com/u/87152661?v=4&amp;s=96" width="48"/><span class="contributor-name">rdbtCVS</span><span class="contributor-count">250 commits</span></a></li><li><a class="contributor" href="https://github.com/levzzz5154"><img alt="" class="contributor-avatar" decoding="async" height="48" loading="lazy" src="https://avatars.githubusercontent.com/u/86072227?v=4&amp;s=96" width="48"/><span class="contributor-name">levzzz5154</span><span class="contributor-count">236 commits</span></a></li><li><a class="contributor" href="https://github.com/Online5277"><img alt="" class="contributor-avatar" decoding="async" height="48" loading="lazy" src="https://avatars.githubusercontent.com/u/84875247?v=4&amp;s=96" width="48"/><span class="contributor-name">Online5277</span><span class="contributor-count">122 commits</span></a></li><li><a class="contributor" href="https://github.com/Domanffe"><img alt="" class="contributor-avatar" decoding="async" height="48" loading="lazy" src="https://avatars.githubusercontent.com/u/94391234?v=4&amp;s=96" width="48"/><span class="contributor-name">Domanffe</span><span class="contributor-count">67 commits</span></a></li><li><a class="contributor" href="https://github.com/d3grando"><img alt="" class="contributor-avatar" decoding="async" height="48" loading="lazy" src="https://avatars.githubusercontent.com/u/36463198?v=4&amp;s=96" width="48"/><span class="contributor-name">d3grando</span><span class="contributor-count">53 commits</span></a></li><li><a class="contributor" href="https://github.com/socksprox"><img alt="" class="contributor-avatar" decoding="async" height="48" loading="lazy" src="https://avatars.githubusercontent.com/u/36358673?v=4&amp;s=96" width="48"/><span class="contributor-name">socksprox</span><span class="contributor-count">41 commits</span></a></li><li><a class="contributor" href="https://github.com/iLostName"><img alt="" class="contributor-avatar" decoding="async" height="48" loading="lazy" src="https://avatars.githubusercontent.com/u/55976057?v=4&amp;s=96" width="48"/><span class="contributor-name">iLostName</span><span class="contributor-count">27 commits</span></a></li><li><a class="contributor" href="https://github.com/FusselTV"><img alt="" class="contributor-avatar" decoding="async" height="48" loading="lazy" src="https://avatars.githubusercontent.com/u/89834718?v=4&amp;s=96" width="48"/><span class="contributor-name">FusselTV</span><span class="contributor-count">22 commits</span></a></li><li><a class="contributor" href="https://github.com/hectoreccles"><img alt="" class="contributor-avatar" decoding="async" height="48" loading="lazy" src="https://avatars.githubusercontent.com/u/80791403?v=4&amp;s=96" width="48"/><span class="contributor-name">hectoreccles</span><span class="contributor-count">21 commits</span></a></li><li><a class="contributor" href="https://github.com/claude"><img alt="" class="contributor-avatar" decoding="async" height="48" loading="lazy" src="https://avatars.githubusercontent.com/u/81847?v=4&amp;s=96" width="48"/><span class="contributor-name">claude</span><span class="contributor-count">20 commits</span></a></li><li><a class="contributor" href="https://github.com/ThatCakeIsAPie"><img alt="" class="contributor-avatar" decoding="async" height="48" loading="lazy" src="https://avatars.githubusercontent.com/u/67918737?v=4&amp;s=96" width="48"/><span class="contributor-name">ThatCakeIsAPie</span><span class="contributor-count">19 commits</span></a></li><li><a class="contributor" href="https://github.com/LookImEcho-Rick"><img alt="" class="contributor-avatar" decoding="async" height="48" loading="lazy" src="https://avatars.githubusercontent.com/u/62575172?v=4&amp;s=96" width="48"/><span class="contributor-name">LookImEcho-Rick</span><span class="contributor-count">17 commits</span></a></li><li><a class="contributor" href="https://github.com/ESHAYAT102"><img alt="" class="contributor-avatar" decoding="async" height="48" loading="lazy" src="https://avatars.githubusercontent.com/u/133668606?v=4&amp;s=96" width="48"/><span class="contributor-name">ESHAYAT102</span><span class="contributor-count">14 commits</span></a></li><li><a class="contributor" href="https://github.com/senjinthedragon"><img alt="" class="contributor-avatar" decoding="async" height="48" loading="lazy" src="https://avatars.githubusercontent.com/u/7110929?v=4&amp;s=96" width="48"/><span class="contributor-name">senjinthedragon</span><span class="contributor-count">14 commits</span></a></li><li><a class="contributor" href="https://github.com/degepie"><img alt="" class="contributor-avatar" decoding="async" height="48" loading="lazy" src="https://avatars.githubusercontent.com/u/14111678?v=4&amp;s=96" width="48"/><span class="contributor-name">degepie</span><span class="contributor-count">14 commits</span></a></li><li><a class="contributor" href="https://github.com/vlesmentie"><img alt="" class="contributor-avatar" decoding="async" height="48" loading="lazy" src="https://avatars.githubusercontent.com/u/129341611?v=4&amp;s=96" width="48"/><span class="contributor-name">vlesmentie</span><span class="contributor-count">14 commits</span></a></li><li><a class="contributor" href="https://github.com/Joansitoh"><img alt="" class="contributor-avatar" decoding="async" height="48" loading="lazy" src="https://avatars.githubusercontent.com/u/36512960?v=4&amp;s=96" width="48"/><span class="contributor-name">Joansitoh</span><span class="contributor-count">13 commits</span></a></li><li><a class="contributor" href="https://github.com/masa-masa-0314"><img alt="" class="contributor-avatar" decoding="async" height="48" loading="lazy" src="https://avatars.githubusercontent.com/u/348336850?v=4&amp;s=96" width="48"/><span class="contributor-name">masa-masa-0314</span><span class="contributor-count">12 commits</span></a></li><li><a class="contributor" href="https://github.com/sirrayi"><img alt="" class="contributor-avatar" decoding="async" height="48" loading="lazy" src="https://avatars.githubusercontent.com/u/191805916?v=4&amp;s=96" width="48"/><span class="contributor-name">sirrayi</span><span class="contributor-count">10 commits</span></a></li><li><a class="contributor" href="https://github.com/some-du6e"><img alt="" class="contributor-avatar" decoding="async" height="48" loading="lazy" src="https://avatars.githubusercontent.com/u/103129948?v=4&amp;s=96" width="48"/><span class="contributor-name">some-du6e</span><span class="contributor-count">10 commits</span></a></li><li><a class="contributor" href="https://github.com/ItsPotatoTime"><img alt="" class="contributor-avatar" decoding="async" height="48" loading="lazy" src="https://avatars.githubusercontent.com/u/50008984?v=4&amp;s=96" width="48"/><span class="contributor-name">ItsPotatoTime</span><span class="contributor-count">9 commits</span></a></li><li><a class="contributor" href="https://github.com/deezhizyu"><img alt="" class="contributor-avatar" decoding="async" height="48" loading="lazy" src="https://avatars.githubusercontent.com/u/34485522?v=4&amp;s=96" width="48"/><span class="contributor-name">deezhizyu</span><span class="contributor-count">8 commits</span></a></li><li><a class="contributor" href="https://github.com/feeldev12"><img alt="" class="contributor-avatar" decoding="async" height="48" loading="lazy" src="https://avatars.githubusercontent.com/u/190163587?v=4&amp;s=96" width="48"/><span class="contributor-name">feeldev12</span><span class="contributor-count">8 commits</span></a></li><li><a class="contributor" href="https://github.com/carlosnunez09"><img alt="" class="contributor-avatar" decoding="async" height="48" loading="lazy" src="https://avatars.githubusercontent.com/u/80909466?v=4&amp;s=96" width="48"/><span class="contributor-name">carlosnunez09</span><span class="contributor-count">7 commits</span></a></li><li><a class="contributor" href="https://github.com/RVZO6"><img alt="" class="contributor-avatar" decoding="async" height="48" loading="lazy" src="https://avatars.githubusercontent.com/u/66844656?v=4&amp;s=96" width="48"/><span class="contributor-name">RVZO6</span><span class="contributor-count">7 commits</span></a></li><li><a class="contributor" href="https://github.com/Expected333"><img alt="" class="contributor-avatar" decoding="async" height="48" loading="lazy" src="https://avatars.githubusercontent.com/u/54284486?v=4&amp;s=96" width="48"/><span class="contributor-name">Expected333</span><span class="contributor-count">6 commits</span></a></li><li><a class="contributor" href="https://github.com/lazy-importer"><img alt="" class="contributor-avatar" decoding="async" height="48" loading="lazy" src="https://avatars.githubusercontent.com/u/207369570?v=4&amp;s=96" width="48"/><span class="contributor-name">lazy-importer</span><span class="contributor-count">6 commits</span></a></li><li><a class="contributor" href="https://github.com/spidercraft"><img alt="" class="contributor-avatar" decoding="async" height="48" loading="lazy" src="https://avatars.githubusercontent.com/u/51022611?v=4&amp;s=96" width="48"/><span class="contributor-name">spidercraft</span><span class="contributor-count">6 commits</span></a></li><li><a class="contributor" href="https://github.com/sdraeger"><img alt="" class="contributor-avatar" decoding="async" height="48" loading="lazy" src="https://avatars.githubusercontent.com/u/20014538?v=4&amp;s=96" width="48"/><span class="contributor-name">sdraeger</span><span class="contributor-count">5 commits</span></a></li><li><a class="contributor" href="https://github.com/GIGABAIT93"><img alt="" class="contributor-avatar" decoding="async" height="48" loading="lazy" src="https://avatars.githubusercontent.com/u/59637348?v=4&amp;s=96" width="48"/><span class="contributor-name">GIGABAIT93</span><span class="contributor-count">5 commits</span></a></li><li><a class="contributor" href="https://github.com/xFedeT"><img alt="" class="contributor-avatar" decoding="async" height="48" loading="lazy" src="https://avatars.githubusercontent.com/u/76874696?v=4&amp;s=96" width="48"/><span class="contributor-name">xFedeT</span><span class="contributor-count">5 commits</span></a></li><li><a class="contributor" href="https://github.com/DanielGodriNeto"><img alt="" class="contributor-avatar" decoding="async" height="48" loading="lazy" src="https://avatars.githubusercontent.com/u/268769724?v=4&amp;s=96" width="48"/><span class="contributor-name">DanielGodriNeto</span><span class="contributor-count">5 commits</span></a></li><li><a class="contributor" href="https://github.com/noreply"><img alt="" class="contributor-avatar" decoding="async" height="48" loading="lazy" src="https://avatars.githubusercontent.com/u/1239515?v=4&amp;s=96" width="48"/><span class="contributor-name">noreply</span><span class="contributor-count">4 commits</span></a></li><li><a class="contributor" href="https://github.com/kerimgrande"><img alt="" class="contributor-avatar" decoding="async" height="48" loading="lazy" src="https://avatars.githubusercontent.com/u/105588426?v=4&amp;s=96" width="48"/><span class="contributor-name">kerimgrande</span><span class="contributor-count">4 commits</span></a></li><li><a class="contributor" href="https://github.com/zhykowo"><img alt="" class="contributor-avatar" decoding="async" height="48" loading="lazy" src="https://avatars.githubusercontent.com/u/122154410?v=4&amp;s=96" width="48"/><span class="contributor-name">zhykowo</span><span class="contributor-count">3 commits</span></a></li><li><a class="contributor" href="https://github.com/martipops"><img alt="" class="contributor-avatar" decoding="async" height="48" loading="lazy" src="https://avatars.githubusercontent.com/u/15958874?v=4&amp;s=96" width="48"/><span class="contributor-name">martipops</span><span class="contributor-count">3 commits</span></a></li><li><a class="contributor" href="https://github.com/RobertTGreat"><img alt="" class="contributor-avatar" decoding="async" height="48" loading="lazy" src="https://avatars.githubusercontent.com/u/111189845?v=4&amp;s=96" width="48"/><span class="contributor-name">RobertTGreat</span><span class="contributor-count">3 commits</span></a></li><li><a class="contributor" href="https://github.com/Excurs1ons"><img alt="" class="contributor-avatar" decoding="async" height="48" loading="lazy" src="https://avatars.githubusercontent.com/u/27911654?v=4&amp;s=96" width="48"/><span class="contributor-name">Excurs1ons</span><span class="contributor-count">3 commits</span></a></li><li><a class="contributor" href="https://github.com/kaicsm"><img alt="" class="contributor-avatar" decoding="async" height="48" loading="lazy" src="https://avatars.githubusercontent.com/u/68879185?v=4&amp;s=96" width="48"/><span class="contributor-name">kaicsm</span><span class="contributor-count">2 commits</span></a></li><li><a class="contributor" href="https://github.com/jaszkus"><img alt="" class="contributor-avatar" decoding="async" height="48" loading="lazy" src="https://avatars.githubusercontent.com/u/103733654?v=4&amp;s=96" width="48"/><span class="contributor-name">jaszkus</span><span class="contributor-count">2 commits</span></a></li><li><a class="contributor" href="https://github.com/Yvonne-Aizawa"><img alt="" class="contributor-avatar" decoding="async" height="48" loading="lazy" src="https://avatars.githubusercontent.com/u/106619470?v=4&amp;s=96" width="48"/><span class="contributor-name">Yvonne-Aizawa</span><span class="contributor-count">2 commits</span></a></li><li><a class="contributor" href="https://github.com/xKumorio"><img alt="" class="contributor-avatar" decoding="async" height="48" loading="lazy" src="https://avatars.githubusercontent.com/u/78680226?v=4&amp;s=96" width="48"/><span class="contributor-name">xKumorio</span><span class="contributor-count">2 commits</span></a></li><li><a class="contributor" href="https://github.com/dreadpiratejoelius"><img alt="" class="contributor-avatar" decoding="async" height="48" loading="lazy" src="https://avatars.githubusercontent.com/u/81833822?v=4&amp;s=96" width="48"/><span class="contributor-name">dreadpiratejoelius</span><span class="contributor-count">2 commits</span></a></li><li><a class="contributor" href="https://github.com/mahirsn"><img alt="" class="contributor-avatar" decoding="async" height="48" loading="lazy" src="https://avatars.githubusercontent.com/u/119164079?v=4&amp;s=96" width="48"/><span class="contributor-name">mahirsn</span><span class="contributor-count">2 commits</span></a></li><li><a class="contributor" href="https://github.com/SolomonNumb1"><img alt="" class="contributor-avatar" decoding="async" height="48" loading="lazy" src="https://avatars.githubusercontent.com/u/293612382?v=4&amp;s=96" width="48"/><span class="contributor-name">SolomonNumb1</span><span class="contributor-count">2 commits</span></a></li><li><a class="contributor" href="https://github.com/Louistuis"><img alt="" class="contributor-avatar" decoding="async" height="48" loading="lazy" src="https://avatars.githubusercontent.com/u/179310784?v=4&amp;s=96" width="48"/><span class="contributor-name">Louistuis</span><span class="contributor-count">2 commits</span></a></li><li><a class="contributor" href="https://github.com/JustKarkat"><img alt="" class="contributor-avatar" decoding="async" height="48" loading="lazy" src="https://avatars.githubusercontent.com/u/50185858?v=4&amp;s=96" width="48"/><span class="contributor-name">JustKarkat</span><span class="contributor-count">2 commits</span></a></li><li><a class="contributor" href="https://github.com/josegil1909"><img alt="" class="contributor-avatar" decoding="async" height="48" loading="lazy" src="https://avatars.githubusercontent.com/u/71802662?v=4&amp;s=96" width="48"/><span class="contributor-name">josegil1909</span><span class="contributor-count">2 commits</span></a></li><li><a class="contributor" href="https://github.com/hamza-cskn"><img alt="" class="contributor-avatar" decoding="async" height="48" loading="lazy" src="https://avatars.githubusercontent.com/u/36128276?v=4&amp;s=96" width="48"/><span class="contributor-name">hamza-cskn</span><span class="contributor-count">2 commits</span></a></li><li><a class="contributor" href="https://github.com/SlaVKsVolks"><img alt="" class="contributor-avatar" decoding="async" height="48" loading="lazy" src="https://avatars.githubusercontent.com/u/96493050?v=4&amp;s=96" width="48"/><span class="contributor-name">SlaVKsVolks</span><span class="contributor-count">1 commit</span></a></li><li><a class="contributor" href="https://github.com/sleepe229"><img alt="" class="contributor-avatar" decoding="async" height="48" loading="lazy" src="https://avatars.githubusercontent.com/u/98430908?v=4&amp;s=96" width="48"/><span class="contributor-name">sleepe229</span><span class="contributor-count">1 commit</span></a></li><li><a class="contributor" href="https://github.com/cristibctr"><img alt="" class="contributor-avatar" decoding="async" height="48" loading="lazy" src="https://avatars.githubusercontent.com/u/61913553?v=4&amp;s=96" width="48"/><span class="contributor-name">cristibctr</span><span class="contributor-count">1 commit</span></a></li><li><a class="contributor" href="https://github.com/gemakfy"><img alt="" class="contributor-avatar" decoding="async" height="48" loading="lazy" src="https://avatars.githubusercontent.com/u/152104430?v=4&amp;s=96" width="48"/><span class="contributor-name">gemakfy</span><span class="contributor-count">1 commit</span></a></li><li><a class="contributor" href="https://github.com/kerneldroid"><img alt="" class="contributor-avatar" decoding="async" height="48" loading="lazy" src="https://avatars.githubusercontent.com/u/212222389?v=4&amp;s=96" width="48"/><span class="contributor-name">kerneldroid</span><span class="contributor-count">1 commit</span></a></li><li><a class="contributor" href="https://github.com/malordin"><img alt="" class="contributor-avatar" decoding="async" height="48" loading="lazy" src="https://avatars.githubusercontent.com/u/20083687?v=4&amp;s=96" width="48"/><span class="contributor-name">malordin</span><span class="contributor-count">1 commit</span></a></li><li><a class="contributor" href="https://github.com/matyden"><img alt="" class="contributor-avatar" decoding="async" height="48" loading="lazy" src="https://avatars.githubusercontent.com/u/194990071?v=4&amp;s=96" width="48"/><span class="contributor-name">matyden</span><span class="contributor-count">1 commit</span></a></li><li><a class="contributor" href="https://github.com/repositorykreml1n"><img alt="" class="contributor-avatar" decoding="async" height="48" loading="lazy" src="https://avatars.githubusercontent.com/u/271232376?v=4&amp;s=96" width="48"/><span class="contributor-name">repositorykreml1n</span><span class="contributor-count">1 commit</span></a></li><li><a class="contributor" href="https://github.com/sl4ppleware"><img alt="" class="contributor-avatar" decoding="async" height="48" loading="lazy" src="https://avatars.githubusercontent.com/u/66299946?v=4&amp;s=96" width="48"/><span class="contributor-name">sl4ppleware</span><span class="contributor-count">1 commit</span></a></li><li><a class="contributor" href="https://github.com/UMCEKO"><img alt="" class="contributor-avatar" decoding="async" height="48" loading="lazy" src="https://avatars.githubusercontent.com/u/11256132?v=4&amp;s=96" width="48"/><span class="contributor-name">UMCEKO</span><span class="contributor-count">1 commit</span></a></li><li><a class="contributor" href="https://github.com/Vadyanik"><img alt="" class="contributor-avatar" decoding="async" height="48" loading="lazy" src="https://avatars.githubusercontent.com/u/133569491?v=4&amp;s=96" width="48"/><span class="contributor-name">Vadyanik</span><span class="contributor-count">1 commit</span></a></li><li><a class="contributor" href="https://github.com/sifi11"><img alt="" class="contributor-avatar" decoding="async" height="48" loading="lazy" src="https://avatars.githubusercontent.com/u/264699045?v=4&amp;s=96" width="48"/><span class="contributor-name">sifi11</span><span class="contributor-count">1 commit</span></a></li><li><a class="contributor" href="https://github.com/echo-ilovech3ss"><img alt="" class="contributor-avatar" decoding="async" height="48" loading="lazy" src="https://avatars.githubusercontent.com/u/272713819?v=4&amp;s=96" width="48"/><span class="contributor-name">echo-ilovech3ss</span><span class="contributor-count">1 commit</span></a></li><li><a class="contributor" href="https://github.com/SU4G3"><img alt="" class="contributor-avatar" decoding="async" height="48" loading="lazy" src="https://avatars.githubusercontent.com/u/92383635?v=4&amp;s=96" width="48"/><span class="contributor-name">SU4G3</span><span class="contributor-count">1 commit</span></a></li><li><a class="contributor" href="https://github.com/PH4N7OMx"><img alt="" class="contributor-avatar" decoding="async" height="48" loading="lazy" src="https://avatars.githubusercontent.com/u/207030902?v=4&amp;s=96" width="48"/><span class="contributor-name">PH4N7OMx</span><span class="contributor-count">1 commit</span></a></li><li><a class="contributor" href="https://github.com/nirajkhetre"><img alt="" class="contributor-avatar" decoding="async" height="48" loading="lazy" src="https://avatars.githubusercontent.com/u/66451427?v=4&amp;s=96" width="48"/><span class="contributor-name">nirajkhetre</span><span class="contributor-count">1 commit</span></a></li><li><a class="contributor" href="https://github.com/NikitaRTN"><img alt="" class="contributor-avatar" decoding="async" height="48" loading="lazy" src="https://avatars.githubusercontent.com/u/94916071?v=4&amp;s=96" width="48"/><span class="contributor-name">NikitaRTN</span><span class="contributor-count">1 commit</span></a></li><li><a class="contributor" href="https://github.com/Murilinho145SG"><img alt="" class="contributor-avatar" decoding="async" height="48" loading="lazy" src="https://avatars.githubusercontent.com/u/88172584?v=4&amp;s=96" width="48"/><span class="contributor-name">Murilinho145SG</span><span class="contributor-count">1 commit</span></a></li><li><a class="contributor" href="https://github.com/cryingtoilet"><img alt="" class="contributor-avatar" decoding="async" height="48" loading="lazy" src="https://avatars.githubusercontent.com/u/134166433?v=4&amp;s=96" width="48"/><span class="contributor-name">cryingtoilet</span><span class="contributor-count">1 commit</span></a></li><li><a class="contributor" href="https://github.com/fo-agent"><img alt="" class="contributor-avatar" decoding="async" height="48" loading="lazy" src="https://avatars.githubusercontent.com/u/340728789?v=4&amp;s=96" width="48"/><span class="contributor-name">fo-agent</span><span class="contributor-count">1 commit</span></a></li><li><a class="contributor" href="https://github.com/cursoragent"><img alt="" class="contributor-avatar" decoding="async" height="48" loading="lazy" src="https://avatars.githubusercontent.com/u/199161495?v=4&amp;s=96" width="48"/><span class="contributor-name">cursoragent</span><span class="contributor-count">1 commit</span></a></li><li><a class="contributor" href="https://github.com/arismoko"><img alt="" class="contributor-avatar" decoding="async" height="48" loading="lazy" src="https://avatars.githubusercontent.com/u/19542195?v=4&amp;s=96" width="48"/><span class="contributor-name">arismoko</span><span class="contributor-count">1 commit</span></a></li><li><a class="contributor" href="https://github.com/AHHhHHHHH-H"><img alt="" class="contributor-avatar" decoding="async" height="48" loading="lazy" src="https://avatars.githubusercontent.com/u/149083296?v=4&amp;s=96" width="48"/><span class="contributor-name">AHHhHHHHH-H</span><span class="contributor-count">1 commit</span></a></li></ul>
+</div>
+</div>
+</section>
+</main>
+
+<section aria-labelledby="comparison-title" class="section comparison" id="comparison">
+<div class="container">
+<div class="section-head">
+<p class="kicker reveal"><span>07</span>Comparison</p>
+<h2 class="title reveal" id="comparison-title">Horizon Upstream vs This Fork</h2>
+<p class="lede reveal">A transparent overview of how this fork removes third-party account coupling while preserving 100% vanilla parity.</p>
+</div>
+<div class="table-wrap reveal">
+<table class="bench-table">
+<thead>
+<tr>
+<th scope="col">Feature</th>
+<th scope="col">Horizon Upstream</th>
+<th scope="col">This Fork</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th scope="row">Microsoft Account</th>
+<td>Required for setup</td>
+<td class="wins">None</td>
+</tr>
+<tr>
+<th scope="row">Keyring Dependencies</th>
+<td>Present</td>
+<td class="wins">Removed</td>
+</tr>
+<tr>
+<th scope="row">Offline Launch</th>
+<td>No</td>
+<td class="wins">Yes</td>
+</tr>
+<tr>
+<th scope="row">File Source</th>
+<td>Mojang (via official launcher)</td>
+<td class="wins">Mojang (direct, public endpoints)</td>
+</tr>
+<tr>
+<th scope="row">Upstream Sync</th>
+<td>N/A</td>
+<td class="wins">Yes (MSA stripped)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<footer class="footer">
+<div class="container">
+<p class="footer-disclaimer">Not an official Minecraft product. Not approved by or associated with Mojang or Microsoft.</p>
+<div class="footer-cols">
+<p>Horizon is made by <a href="https://lu4ovic.com">Ludovic Marie</a>, who is responsible for it and for this site; reach him through <a href="https://lu4ovic.com/#contact">lu4ovic.com</a>. Horizon contains no Minecraft code, assets or data, and this site offers no game files: you need your own legally obtained copy of Minecraft: Java Edition. Minecraft is a trademark of Mojang Synergies AB.</p>
+<p>Horizon's original work is under the <a href="https://github.com/jabirking-ux/horizon-offline">MIT licence</a>. The fonts are Geist and Geist Mono, under the <a href="/fonts/OFL-Geist.txt">SIL Open Font License</a>. Every asset on this site is listed in <a href="/LEGAL.md">LEGAL.md</a>.</p><p>Fork of <a href="https://github.com/ludovic111/horizon">ludovic111/horizon</a>. Maintained independently with stripped MSA and direct Mojang asset pipeline.</p>
+<p>Privacy: this site sets no cookies, has no analytics or trackers and loads nothing from third parties except GitHub. To show the latest releases, patch notes, links and contributors, your browser asks <code>api.github.com</code> and <code>raw.githubusercontent.com</code> for them, and <code>avatars.githubusercontent.com</code> for the contributors' pictures; <a href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement">GitHub's privacy statement</a> covers those requests. The launcher sends nothing unless you allow it: <a href="/privacy">what it can send, and how to delete it</a>.</p>
+</div>
+<div class="footer-bar">
+<span class="footer-mark">Made in the open, in Rust.</span>
+<nav aria-label="Elsewhere" class="footer-links"><a href="https://github.com/jabirking-ux/horizon-offline">GitHub</a><a href="/releases">Releases</a><a href="/benchmarks">Benchmarks</a><a href="https://github.com/jabirking-ux/horizon-offline">Licence</a><a href="/docs/">Docs</a><a href="/docs/how-horizon-is-built">How it's built</a><a href="/docs/hosting">Host a server</a><a href="/LEGAL.md">Assets</a><a href="/privacy">Privacy</a></nav>
+</div>
+</div>
+<p aria-hidden="true" class="footer-word">horizon</p>
+</footer>
+<dialog aria-label="Screenshot" class="lightbox">
+<form method="dialog"><button class="button secondary close" type="submit">Close</button></form>
+<img alt=""/>
+<p class="lightbox-caption"></p>
+</dialog>
+<script id="baked" type="application/json">{"links":{"discord":"https://discord.gg/HcTeMZxe5E","sponsor":"https://github.com/sponsors/ludovic111"},"contributors":[{"login":"ludovic111","html_url":"https://github.com/ludovic111","avatar_url":"https://avatars.githubusercontent.com/u/136255825?v=4","contributions":5807},{"login":"kacpherek","html_url":"https://github.com/kacpherek","avatar_url":"https://avatars.githubusercontent.com/u/54669067?v=4","contributions":667},{"login":"rdbtCVS","html_url":"https://github.com/rdbtCVS","avatar_url":"https://avatars.githubusercontent.com/u/87152661?v=4","contributions":250},{"login":"levzzz5154","html_url":"https://github.com/levzzz5154","avatar_url":"https://avatars.githubusercontent.com/u/86072227?v=4","contributions":236},{"login":"Online5277","html_url":"https://github.com/Online5277","avatar_url":"https://avatars.githubusercontent.com/u/84875247?v=4","contributions":122},{"login":"Domanffe","html_url":"https://github.com/Domanffe","avatar_url":"https://avatars.githubusercontent.com/u/94391234?v=4","contributions":67},{"login":"d3grando","html_url":"https://github.com/d3grando","avatar_url":"https://avatars.githubusercontent.com/u/36463198?v=4","contributions":53},{"login":"socksprox","html_url":"https://github.com/socksprox","avatar_url":"https://avatars.githubusercontent.com/u/36358673?v=4","contributions":41},{"login":"iLostName","html_url":"https://github.com/iLostName","avatar_url":"https://avatars.githubusercontent.com/u/55976057?v=4","contributions":27},{"login":"FusselTV","html_url":"https://github.com/FusselTV","avatar_url":"https://avatars.githubusercontent.com/u/89834718?v=4","contributions":22},{"login":"hectoreccles","html_url":"https://github.com/hectoreccles","avatar_url":"https://avatars.githubusercontent.com/u/80791403?v=4","contributions":21},{"login":"claude","html_url":"https://github.com/claude","avatar_url":"https://avatars.githubusercontent.com/u/81847?v=4","contributions":20},{"login":"ThatCakeIsAPie","html_url":"https://github.com/ThatCakeIsAPie","avatar_url":"https://avatars.githubusercontent.com/u/67918737?v=4","contributions":19},{"login":"LookImEcho-Rick","html_url":"https://github.com/LookImEcho-Rick","avatar_url":"https://avatars.githubusercontent.com/u/62575172?v=4","contributions":17},{"login":"ESHAYAT102","html_url":"https://github.com/ESHAYAT102","avatar_url":"https://avatars.githubusercontent.com/u/133668606?v=4","contributions":14},{"login":"senjinthedragon","html_url":"https://github.com/senjinthedragon","avatar_url":"https://avatars.githubusercontent.com/u/7110929?v=4","contributions":14},{"login":"degepie","html_url":"https://github.com/degepie","avatar_url":"https://avatars.githubusercontent.com/u/14111678?v=4","contributions":14},{"login":"vlesmentie","html_url":"https://github.com/vlesmentie","avatar_url":"https://avatars.githubusercontent.com/u/129341611?v=4","contributions":14},{"login":"Joansitoh","html_url":"https://github.com/Joansitoh","avatar_url":"https://avatars.githubusercontent.com/u/36512960?v=4","contributions":13},{"login":"masa-masa-0314","html_url":"https://github.com/masa-masa-0314","avatar_url":"https://avatars.githubusercontent.com/u/348336850?v=4","contributions":12},{"login":"sirrayi","html_url":"https://github.com/sirrayi","avatar_url":"https://avatars.githubusercontent.com/u/191805916?v=4","contributions":10},{"login":"some-du6e","html_url":"https://github.com/some-du6e","avatar_url":"https://avatars.githubusercontent.com/u/103129948?v=4","contributions":10},{"login":"ItsPotatoTime","html_url":"https://github.com/ItsPotatoTime","avatar_url":"https://avatars.githubusercontent.com/u/50008984?v=4","contributions":9},{"login":"deezhizyu","html_url":"https://github.com/deezhizyu","avatar_url":"https://avatars.githubusercontent.com/u/34485522?v=4","contributions":8},{"login":"feeldev12","html_url":"https://github.com/feeldev12","avatar_url":"https://avatars.githubusercontent.com/u/190163587?v=4","contributions":8},{"login":"carlosnunez09","html_url":"https://github.com/carlosnunez09","avatar_url":"https://avatars.githubusercontent.com/u/80909466?v=4","contributions":7},{"login":"RVZO6","html_url":"https://github.com/RVZO6","avatar_url":"https://avatars.githubusercontent.com/u/66844656?v=4","contributions":7},{"login":"Expected333","html_url":"https://github.com/Expected333","avatar_url":"https://avatars.githubusercontent.com/u/54284486?v=4","contributions":6},{"login":"lazy-importer","html_url":"https://github.com/lazy-importer","avatar_url":"https://avatars.githubusercontent.com/u/207369570?v=4","contributions":6},{"login":"spidercraft","html_url":"https://github.com/spidercraft","avatar_url":"https://avatars.githubusercontent.com/u/51022611?v=4","contributions":6},{"login":"sdraeger","html_url":"https://github.com/sdraeger","avatar_url":"https://avatars.githubusercontent.com/u/20014538?v=4","contributions":5},{"login":"GIGABAIT93","html_url":"https://github.com/GIGABAIT93","avatar_url":"https://avatars.githubusercontent.com/u/59637348?v=4","contributions":5},{"login":"xFedeT","html_url":"https://github.com/xFedeT","avatar_url":"https://avatars.githubusercontent.com/u/76874696?v=4","contributions":5},{"login":"DanielGodriNeto","html_url":"https://github.com/DanielGodriNeto","avatar_url":"https://avatars.githubusercontent.com/u/268769724?v=4","contributions":5},{"login":"noreply","html_url":"https://github.com/noreply","avatar_url":"https://avatars.githubusercontent.com/u/1239515?v=4","contributions":4},{"login":"kerimgrande","html_url":"https://github.com/kerimgrande","avatar_url":"https://avatars.githubusercontent.com/u/105588426?v=4","contributions":4},{"login":"zhykowo","html_url":"https://github.com/zhykowo","avatar_url":"https://avatars.githubusercontent.com/u/122154410?v=4","contributions":3},{"login":"martipops","html_url":"https://github.com/martipops","avatar_url":"https://avatars.githubusercontent.com/u/15958874?v=4","contributions":3},{"login":"RobertTGreat","html_url":"https://github.com/RobertTGreat","avatar_url":"https://avatars.githubusercontent.com/u/111189845?v=4","contributions":3},{"login":"Excurs1ons","html_url":"https://github.com/Excurs1ons","avatar_url":"https://avatars.githubusercontent.com/u/27911654?v=4","contributions":3},{"login":"kaicsm","html_url":"https://github.com/kaicsm","avatar_url":"https://avatars.githubusercontent.com/u/68879185?v=4","contributions":2},{"login":"jaszkus","html_url":"https://github.com/jaszkus","avatar_url":"https://avatars.githubusercontent.com/u/103733654?v=4","contributions":2},{"login":"Yvonne-Aizawa","html_url":"https://github.com/Yvonne-Aizawa","avatar_url":"https://avatars.githubusercontent.com/u/106619470?v=4","contributions":2},{"login":"xKumorio","html_url":"https://github.com/xKumorio","avatar_url":"https://avatars.githubusercontent.com/u/78680226?v=4","contributions":2},{"login":"dreadpiratejoelius","html_url":"https://github.com/dreadpiratejoelius","avatar_url":"https://avatars.githubusercontent.com/u/81833822?v=4","contributions":2},{"login":"mahirsn","html_url":"https://github.com/mahirsn","avatar_url":"https://avatars.githubusercontent.com/u/119164079?v=4","contributions":2},{"login":"SolomonNumb1","html_url":"https://github.com/SolomonNumb1","avatar_url":"https://avatars.githubusercontent.com/u/293612382?v=4","contributions":2},{"login":"Louistuis","html_url":"https://github.com/Louistuis","avatar_url":"https://avatars.githubusercontent.com/u/179310784?v=4","contributions":2},{"login":"JustKarkat","html_url":"https://github.com/JustKarkat","avatar_url":"https://avatars.githubusercontent.com/u/50185858?v=4","contributions":2},{"login":"josegil1909","html_url":"https://github.com/josegil1909","avatar_url":"https://avatars.githubusercontent.com/u/71802662?v=4","contributions":2},{"login":"hamza-cskn","html_url":"https://github.com/hamza-cskn","avatar_url":"https://avatars.githubusercontent.com/u/36128276?v=4","contributions":2},{"login":"SlaVKsVolks","html_url":"https://github.com/SlaVKsVolks","avatar_url":"https://avatars.githubusercontent.com/u/96493050?v=4","contributions":1},{"login":"sleepe229","html_url":"https://github.com/sleepe229","avatar_url":"https://avatars.githubusercontent.com/u/98430908?v=4","contributions":1},{"login":"cristibctr","html_url":"https://github.com/cristibctr","avatar_url":"https://avatars.githubusercontent.com/u/61913553?v=4","contributions":1},{"login":"gemakfy","html_url":"https://github.com/gemakfy","avatar_url":"https://avatars.githubusercontent.com/u/152104430?v=4","contributions":1},{"login":"kerneldroid","html_url":"https://github.com/kerneldroid","avatar_url":"https://avatars.githubusercontent.com/u/212222389?v=4","contributions":1},{"login":"malordin","html_url":"https://github.com/malordin","avatar_url":"https://avatars.githubusercontent.com/u/20083687?v=4","contributions":1},{"login":"matyden","html_url":"https://github.com/matyden","avatar_url":"https://avatars.githubusercontent.com/u/194990071?v=4","contributions":1},{"login":"repositorykreml1n","html_url":"https://github.com/repositorykreml1n","avatar_url":"https://avatars.githubusercontent.com/u/271232376?v=4","contributions":1},{"login":"sl4ppleware","html_url":"https://github.com/sl4ppleware","avatar_url":"https://avatars.githubusercontent.com/u/66299946?v=4","contributions":1},{"login":"UMCEKO","html_url":"https://github.com/UMCEKO","avatar_url":"https://avatars.githubusercontent.com/u/11256132?v=4","contributions":1},{"login":"Vadyanik","html_url":"https://github.com/Vadyanik","avatar_url":"https://avatars.githubusercontent.com/u/133569491?v=4","contributions":1},{"login":"sifi11","html_url":"https://github.com/sifi11","avatar_url":"https://avatars.githubusercontent.com/u/264699045?v=4","contributions":1},{"login":"echo-ilovech3ss","html_url":"https://github.com/echo-ilovech3ss","avatar_url":"https://avatars.githubusercontent.com/u/272713819?v=4","contributions":1},{"login":"SU4G3","html_url":"https://github.com/SU4G3","avatar_url":"https://avatars.githubusercontent.com/u/92383635?v=4","contributions":1},{"login":"PH4N7OMx","html_url":"https://github.com/PH4N7OMx","avatar_url":"https://avatars.githubusercontent.com/u/207030902?v=4","contributions":1},{"login":"nirajkhetre","html_url":"https://github.com/nirajkhetre","avatar_url":"https://avatars.githubusercontent.com/u/66451427?v=4","contributions":1},{"login":"NikitaRTN","html_url":"https://github.com/NikitaRTN","avatar_url":"https://avatars.githubusercontent.com/u/94916071?v=4","contributions":1},{"login":"Murilinho145SG","html_url":"https://github.com/Murilinho145SG","avatar_url":"https://avatars.githubusercontent.com/u/88172584?v=4","contributions":1},{"login":"cryingtoilet","html_url":"https://github.com/cryingtoilet","avatar_url":"https://avatars.githubusercontent.com/u/134166433?v=4","contributions":1},{"login":"fo-agent","html_url":"https://github.com/fo-agent","avatar_url":"https://avatars.githubusercontent.com/u/340728789?v=4","contributions":1},{"login":"cursoragent","html_url":"https://github.com/cursoragent","avatar_url":"https://avatars.githubusercontent.com/u/199161495?v=4","contributions":1},{"login":"arismoko","html_url":"https://github.com/arismoko","avatar_url":"https://avatars.githubusercontent.com/u/19542195?v=4","contributions":1},{"login":"AHHhHHHHH-H","html_url":"https://github.com/AHHhHHHHH-H","avatar_url":"https://avatars.githubusercontent.com/u/149083296?v=4","contributions":1}],"releases":[{"tag_name":"launcher@0.2.26","name":"Horizon launcher 0.2.26","published_at":"2026-10-29T14:41:52Z","html_url":"https://github.com/horizon-rust/horizon/releases/tag/launcher%400.2.26","prerelease":false,"body":"","assets":[{"name":"horizon-launcher-linux-x86_64.tar.gz","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/launcher%400.2.26/horizon-launcher-linux-x86_64.tar.gz","size":19107440},{"name":"horizon-launcher-macos-arm64.dmg","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/launcher%400.2.26/horizon-launcher-macos-arm64.dmg","size":13259609},{"name":"horizon-launcher-macos-arm64.zip","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/launcher%400.2.26/horizon-launcher-macos-arm64.zip","size":12299103},{"name":"horizon-launcher-windows-x64.zip","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/launcher%400.2.26/horizon-launcher-windows-x64.zip","size":13793123},{"name":"SHA256SUMS","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/launcher%400.2.26/SHA256SUMS","size":400},{"name":"SHA256SUMS.sig","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/launcher%400.2.26/SHA256SUMS.sig","size":89}]},{"tag_name":"launcher@0.2.25","name":"Horizon launcher 0.2.25","published_at":"2026-10-29T13:27:12Z","html_url":"https://github.com/horizon-rust/horizon/releases/tag/launcher%400.2.25","prerelease":false,"body":"","assets":[{"name":"horizon-launcher-linux-x86_64.tar.gz","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/launcher%400.2.25/horizon-launcher-linux-x86_64.tar.gz","size":19102416},{"name":"horizon-launcher-macos-arm64.dmg","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/launcher%400.2.25/horizon-launcher-macos-arm64.dmg","size":13255714},{"name":"horizon-launcher-macos-arm64.zip","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/launcher%400.2.25/horizon-launcher-macos-arm64.zip","size":12290015},{"name":"horizon-launcher-windows-x64.zip","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/launcher%400.2.25/horizon-launcher-windows-x64.zip","size":13767143},{"name":"SHA256SUMS","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/launcher%400.2.25/SHA256SUMS","size":400},{"name":"SHA256SUMS.sig","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/launcher%400.2.25/SHA256SUMS.sig","size":89}]},{"tag_name":"launcher@0.2.24","name":"Horizon launcher 0.2.24","published_at":"2026-10-29T09:21:18Z","html_url":"https://github.com/horizon-rust/horizon/releases/tag/launcher%400.2.24","prerelease":false,"body":"","assets":[{"name":"horizon-launcher-linux-x86_64.tar.gz","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/launcher%400.2.24/horizon-launcher-linux-x86_64.tar.gz","size":18994807},{"name":"horizon-launcher-macos-arm64.dmg","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/launcher%400.2.24/horizon-launcher-macos-arm64.dmg","size":13141159},{"name":"horizon-launcher-macos-arm64.zip","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/launcher%400.2.24/horizon-launcher-macos-arm64.zip","size":12191011},{"name":"horizon-launcher-windows-x64.zip","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/launcher%400.2.24/horizon-launcher-windows-x64.zip","size":13680846},{"name":"SHA256SUMS","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/launcher%400.2.24/SHA256SUMS","size":400},{"name":"SHA256SUMS.sig","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/launcher%400.2.24/SHA256SUMS.sig","size":89}]},{"tag_name":"nightly-2026-10-29","name":"Nightly 2026-10-29 · 45ecf7b","published_at":"2026-10-29T15:31:15Z","html_url":"https://github.com/horizon-rust/horizon/releases/tag/nightly-2026-10-29","prerelease":true,"body":"Nightly 2026-10-29 · 45ecf7b: main (45ecf7b), built from `nightly/build-2026-10-29-5` (45ecf7bef04f873e7cbd45813e0b0f39e441a588).\n\nSource: commit 45ecf7bef04f873e7cbd45813e0b0f39e441a588, kept for good as the tag `nightly-source/2026-10-29-45ecf7b`; horizon-source.tar.gz is its tree. Native mods built for this Nightly pin that commit.\n\nThe launcher installs it by itself; your worlds stay as they are. A Nightly can include pull requests the Team picked before they are merged (below). Report bugs with the version the game shows (\"Nightly \u003cdate> · \u003ccommit>\").\n\n### Fixed\n- Spectators open chests and other containers, read-only (#3445, fixes #3414)\n- Copper chests join into double chests (#3442)\n- Containers: a renamed container opens with its name as the title (#3415, fixes #3245)\n- Creative inventory tab: click locally on a server, as vanilla does (#3307) (#3448, fixes #3307)\n- Text displays: vanilla text depths and polygon offset (holograms no longer z-fight) (#2812)\n- registries: list the resources' recipe, loot table and template ids once, not at every join (#2799)\n- The shield goes up in first person and the other players hold it up (#2807, fixes #2289)\n- sounds: list each namespace's sound files once instead of a lookup per sound (#2839)\n- Untamed horses rear at a held item instead of taking the rider (#2720, fixes #2697)\n- The dragon follows the server that flies it (#2765, fixes #2083)\n- Kelp stops blinking out far away: animated sprites mipmap over the whole sheet (#3433, fixes #1703, fixes #3073)\n- options: sliders apply while dragged and save on release (#2711)\n- server list: the player count's tooltip lists the status sample (#2712)\n- HDR: show the output on the F3 screen and in the log (#2721)\n- title: a world open in another instance shows the access failure toast instead of crashing (#2753)\n- SNBT: bound nesting depth, keep nan/inf words as strings (#2814)\n- fix(client): book text runs and copies its click commands and shows its hover text (#2996, fixes #2999)\n- Scoreboard: report a failed write instead of dropping it (#3101)\n- Creative hotbar: say 'Saved' only when it was saved (#3103)\n- Show a thrown eye of ender's hitbox with F3+B (#3113)\n- Mod API: a sprite shape draws as vanilla's blitSprite, nine-sliced by its gui.scaling (#3130)\n- Keep the block outline while a screen is open (#3161)\n- Build the sunset fan once a frame instead of in every sky pixel (#3167, fixes #3143)\n- tooltip fix (#3241)\n- Piston head: destroy fitting base without drops in creative mode (#3328, fixes #3317)\n- Mod screens: a list's rows are cut at its frame (#3399, fixes #3237)\n- Name tags: draw text as Font.prepareText does (bold, tall glyphs) (#3416, fixes #3084)\n- Window: a size above the GPU's largest texture no longer crashes (#3437)\n- Windows: link untouched directories into the pack overlay with junctions (#3438, fixes #3385)\n- Fog option off clears the Nether's fog too (#3444, fixes #3408)\n- Keep the player model's legs still while flying straight up (#3449, fixes #3302)\n- Tooltips: potion effect and armour trim lines in the selected language (#3456)\n- native_corner_shown: F3 takes the top right and its charts' corners (#3463)\n- Native mod settings: ask for the labels again when the page opens (#3464)\n- Far terrain: sample on up to 6 threads when the machine has 12 or more, behind the game (#3467)\n- Mob-origin item drops get the ItemEntity constructor's random motion (#3498, fixes #3144)\n- Windows: link the overlay's mirrored files instead of copying them (#3511)\n- Projectiles hit a seated enderman (#3553, fixes #3381)\n- Draw glowing sign text in front of its outline (#3554, fixes #3293)\n- Invisible mobs cast no shadow (#3557, fixes #3289)\n- Draw the arms under a map held in first person (#3558, fixes #3136)\n- Attack indicator shows at a spear's extra range (#3559, fixes #3209)\n- Count a zombie villager's cure down in its tick, with or without AI (#3560, fixes #3429)\n- Key binds: a moved key no longer keeps its default action (#3564, fixes #3158)\n- Copper golem eyes glow on the body model, not the empty eyes layer (#3565, fixes #2862)\n- Villager gossip: hits and murders count against the player who did them (#3569, fixes #3431)\n- Creative tooltips list the tabs that hold the item, as vanilla does (#3570, fixes #3426)\n- Follow the XKB keymap for Escape and Caps Lock (#3573, fixes #3133)\n- Commands: coordinate suggestions skip entities and offer the hit point (#3589, fixes #3427)\n- Follow the burn in daylight tag for mobs that burn in the sun (#2345)\n- Horses, donkeys, mules and llamas sync their rolled max health (#2995, fixes #2869)\n- Invisible armor stands: draw their equipment, and send their names to clients (#3359)\n- Send the host's death and advancement messages to guests and follow team visibility (#2411)\n- remote: titles, tab list, scoreboard and effects don't carry over to the next server (#2713, fixes #3134)\n- Fix /list, the missing /damage types and /datapack create (#2951)\n- World list: show Hardcore Mode in red, and adventure and spectator by name (#3298) (#3349, fixes #3298)\n- GUI: screens keep vanilla's int layout at any window size (#3423, fixes #3362)\n- Worldgen: the surface step skips writes that change nothing (#2706)\n- Mobs: undead with NoAI burn in daylight (#3583, fixes #3430)\n\n### Known issues\n- Shader packs have been removed for now. They will come back later, written again from scratch. Packs in your `shaderpacks` folder are left where they are.\n\nThanks to @AHHhHHHHH-H, @ASOwnerYT, @Domanffe, @FusselTV, @Joansitoh, @JustKarkat, @SolomonNumb1, @Vadyanik, @d3grando, @degepie, @echo-ilovech3ss, @feeldev12, @hamza-cskn, @iLostName, @jaszkus, @kacpherek, @levzzz5154, @senjinthedragon, @sirrayi, @sleepe229, @socksprox, @xKumorio.\n\nNot an official Minecraft product. Not approved by or associated with Mojang or Microsoft.\n","assets":[{"name":"horizon-linux-x86_64.tar.gz","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/nightly-2026-10-29/horizon-linux-x86_64.tar.gz","size":34523215},{"name":"horizon-macos-arm64.zip","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/nightly-2026-10-29/horizon-macos-arm64.zip","size":30541316},{"name":"horizon-server-linux-x86_64.tar.gz","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/nightly-2026-10-29/horizon-server-linux-x86_64.tar.gz","size":33825746},{"name":"horizon-source.tar.gz","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/nightly-2026-10-29/horizon-source.tar.gz","size":21398403},{"name":"horizon-windows-x64.zip","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/nightly-2026-10-29/horizon-windows-x64.zip","size":32823458},{"name":"SHA256SUMS","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/nightly-2026-10-29/SHA256SUMS","size":463},{"name":"SHA256SUMS.sig","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/nightly-2026-10-29/SHA256SUMS.sig","size":89},{"name":"smoke-test.json","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/nightly-2026-10-29/smoke-test.json","size":185}]},{"tag_name":"nightly","name":"Nightly 2026-10-29 · a491181","published_at":"2026-10-29T17:09:06Z","html_url":"https://github.com/horizon-rust/horizon/releases/tag/nightly","prerelease":true,"body":"Nightly 2026-10-29 · a491181: main (a491181), built from `nightly/build-2026-10-29-6` (a4911819616385e3e8296b8957e7f60e8a217949).\n\nSource: commit a4911819616385e3e8296b8957e7f60e8a217949, kept for good as the tag `nightly-source/2026-10-29-a491181`; horizon-source.tar.gz is its tree. Native mods built for this Nightly pin that commit.\n\nThe launcher installs it by itself; your worlds stay as they are. A Nightly can include pull requests the Team picked before they are merged (below). Report bugs with the version the game shows (\"Nightly \u003cdate> · \u003ccommit>\").\n\n### Fixed\n- Entity rendering: the enderman's carried block, the fox's held item, the iron golem's poppy, the skeleton's freeze shake and shadow radii as vanilla (#2986)\n- Keep beacon beams visible outside the render distance (#3288)\n- Spears: the jab animates in first and third person (#3240, fixes #3135)\n- Wolves: any target makes a wolf angry, so an alerted pack looks angry (#3591, fixes #3185)\n- Fire the summoned, container loot and recipe crafted advancement triggers (#2973)\n- Credit the curing player of a zombie villager on the server thread (#3306) (#3404, fixes #3306)\n- Repeat attack and use clicks while a key bound to them is held (#3561, fixes #3243)\n- Far tiles: resolve each biome quart once per tile, and a far-tile bench (#3368)\n- Structure checks: one climate volume per column, and each worker keeps its samples (#3364)\n- Biome stage: build free neighbour biome chunks first, cheaper id lookups (#3365)\n- Decoration: inlined block reads, column scans, per-chunk heightmap reads (#3367)\n- End the dragon fight when /kill removes the dragon (#3450, fixes #3319)\n- perf: storage primitives (dirty sections, packed index, palette scan, Fx maps) (#3253)\n\n### Known issues\n- Shader packs have been removed for now. They will come back later, written again from scratch. Packs in your `shaderpacks` folder are left where they are.\n\nThanks to @ThatCakeIsAPie, @d3grando, @degepie, @hectoreccles, @kacpherek, @some-du6e.\n\nNot an official Minecraft product. Not approved by or associated with Mojang or Microsoft.\n","assets":[{"name":"horizon-linux-x86_64.tar.gz","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/nightly/horizon-linux-x86_64.tar.gz","size":34538855},{"name":"horizon-macos-arm64.zip","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/nightly/horizon-macos-arm64.zip","size":30570609},{"name":"horizon-server-linux-x86_64.tar.gz","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/nightly/horizon-server-linux-x86_64.tar.gz","size":33842260},{"name":"horizon-source.tar.gz","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/nightly/horizon-source.tar.gz","size":21413427},{"name":"horizon-windows-x64.zip","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/nightly/horizon-windows-x64.zip","size":32832381},{"name":"SHA256SUMS","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/nightly/SHA256SUMS","size":463},{"name":"SHA256SUMS.sig","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/nightly/SHA256SUMS.sig","size":89},{"name":"smoke-test.json","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/nightly/smoke-test.json","size":192}]},{"tag_name":"v0.2.97","name":"Horizon 0.2.97: Prepare, signs and 16 more fixes","published_at":"2026-10-28T20:57:32Z","html_url":"https://github.com/horizon-rust/horizon/releases/tag/v0.2.97","prerelease":false,"body":"\u003ch3>Want to play? Download the \u003ca href=\"https://playhorizon.dev\">Horizon launcher\u003c/a>, not the files below\u003c/h3>\u003cp>It installs this version and keeps it up to date. It is also on GitHub: \u003ca href=\"https://github.com/horizon-rust/horizon/releases?q=launcher&amp;expanded=true\">the launcher releases\u003c/a>. You need your own copy of Minecraft: Java Edition. The files below are what the launcher installs, and the dedicated server for people who host one.\u003c/p>\n\n### Fixed\n- item pickup: a stack in the off hand fills before the inventory, as getSlotWithRemainingSpace does (#3067, fixes #2865)\n- death message: a creeper's blast names the creeper, not the last mob that hit (#3068, fixes #2978)\n- riding: the crosshair skips the mob being ridden, so it can't be hit (#3069, fixes #2870)\n- boat: the view stops at 105 degrees at every turn, so it doesn't jitter (#3070, fixes #2983)\n- HUD paint: build the sprite key in one reused buffer (#3083)\n- Inventory draw: a slot is drawn from a reference, not a copy (#3086)\n- Creative screen: draw the selected tab from a reference (#3092)\n- Server list: build each row's sprite key once (#3095)\n- Effect panels: borrow the name and reuse the icon key (#3097)\n- Name tags: copy a custom name only inside the tag's range (#3100)\n- Crowded mobs take cramming damage, as vanilla (#3124)\n- Shulker bullets are drawn as the spinning bullet model, not a flat sprite (#3127, fixes #3115)\n- fix(windows): open URLs with the registered protocol handler (#3210)\n- Chat and book links: a show_dialog click event opens its dialog (#3238, fixes #3204)\n- Pin the turtle's walk animation to vanilla's rate (#2748, fixes #1776)\n- The spawn egg's offspring is a named, tested rule (#2791, fixes #2269)\n- Signs: keep laid-out sign text between frames (3458 signs: 124 → 222 fps) (#3284, fixes #1461)\n- Prepare: accept Mojang's fifth 26.3 republish (5df1795e, index 917ff6d7) (#3318)\n\n### Known issues\n- Shader packs have been removed for now. They will come back later, written again from scratch. Packs in your `shaderpacks` folder are left where they are.\n\nThanks to @Domanffe, @PH4N7OMx, @degepie, @iLostName, @kacpherek, @levzzz5154, @masa-masa-0314.\n\nNot an official Minecraft product. Not approved by or associated with Mojang or Microsoft.\n","assets":[{"name":"horizon-linux-x86_64.tar.gz","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/v0.2.97/horizon-linux-x86_64.tar.gz","size":33468900},{"name":"horizon-macos-arm64.zip","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/v0.2.97/horizon-macos-arm64.zip","size":29490171},{"name":"horizon-server-linux-x86_64.tar.gz","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/v0.2.97/horizon-server-linux-x86_64.tar.gz","size":32768247},{"name":"horizon-windows-x64.zip","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/v0.2.97/horizon-windows-x64.zip","size":31775574},{"name":"SHA256SUMS","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/v0.2.97/SHA256SUMS","size":375},{"name":"SHA256SUMS.sig","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/v0.2.97/SHA256SUMS.sig","size":89},{"name":"smoke-test.json","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/v0.2.97/smoke-test.json","size":183}]},{"tag_name":"v0.2.96","name":"Horizon 0.2.96: F1 hides the HUD only with no screen open, as key.toggleGui does and 24 more fixes","published_at":"2026-10-28T19:49:53Z","html_url":"https://github.com/horizon-rust/horizon/releases/tag/v0.2.96","prerelease":false,"body":"\u003ch3>Want to play? Download the \u003ca href=\"https://playhorizon.dev\">Horizon launcher\u003c/a>, not the files below\u003c/h3>\u003cp>It installs this version and keeps it up to date. It is also on GitHub: \u003ca href=\"https://github.com/horizon-rust/horizon/releases?q=launcher&amp;expanded=true\">the launcher releases\u003c/a>. You need your own copy of Minecraft: Java Edition. The files below are what the launcher installs, and the dedicated server for people who host one.\u003c/p>\n\n### Fixed\n- A summoned or egg-spawned mob is not persistent (#2836, fixes #2787)\n- The breeze's wind and the wind charge scroll their textures (#2843, fixes #2760)\n- Worn dyed leather armour shows its dye colour (#2880)\n- Open windowed after the window system kills the game in fullscreen (#2906)\n- Name the projectile in the death message when it has no owner (#2938, fixes #2802)\n- Fix the crash on every start with HDR on in macOS, and start with HDR off after a start that dies in it (#2948)\n- Let a mouse button toggle the cinematic camera (#2957)\n- Fire lightning, spear, nest, shear, allay and sculk advancement triggers (#2975)\n- Return to Sender needs the ghast's own fireball: check player_killed_entity's killing_blow (#2977, fixes #2832)\n- Passive mobs: sound variants, donkey and mule stats, no mule breeding, allay distance and more as vanilla (#2984)\n- Hostile mobs: hoglin timing, crossbow aim, witch resistance, wither skulls, cobwebs, beds and the dragon as vanilla (#2985)\n- Match vanilla for eight block behaviours: ender chest, doors, hanging signs, beehives, carved pumpkins, vines, tripwire and turtle eggs (#2991)\n- Villagers hear bells, use bone meal, fetch dropped items and play tag as vanilla; wolves beg and golems offer flowers as vanilla (#2992)\n- Match vanilla mob and arrow sounds: horses, hostile fall and swim, hurt and death variants, crossbow hits (#2994)\n- fix(client): the link prompt has ConfirmLinkScreen's Copy to Clipboard button (#2997)\n- Hopper ticks check their block only when they move (#3032)\n- Reuse the block entity ticker list between ticks (#3033)\n- Sweep far chunks every eighth tick (#3035)\n- Reuse natural spawn candidate buffers (#3038)\n- Draw entity shadows in dim light like vanilla (#3053)\n- Villagers: report a failed random_sequences write (#3102)\n- Spears: charges hit while riding, and a stab stops the sprint (#3056, fixes #3019)\n- Name tags read the right way in the front third-person view (#3060)\n- redstone ore: a right-click lights it, as RedStoneOreBlock.useItemOn does (#3063, fixes #3044)\n- F1 hides the HUD only with no screen open, as key.toggleGui does (#3065, fixes #2942)\n\n### Known issues\n- Shader packs have been removed for now. They will come back later, written again from scratch. Packs in your `shaderpacks` folder are left where they are.\n\nThanks to @ASOwnerYT, @Domanffe, @feeldev12, @hectoreccles, @iLostName, @kacpherek, @leifiyoo, @levzzz5154.\n\nNot an official Minecraft product. Not approved by or associated with Mojang or Microsoft.\n","assets":[{"name":"horizon-linux-x86_64.tar.gz","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/v0.2.96/horizon-linux-x86_64.tar.gz","size":33461209},{"name":"horizon-macos-arm64.zip","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/v0.2.96/horizon-macos-arm64.zip","size":29479794},{"name":"horizon-server-linux-x86_64.tar.gz","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/v0.2.96/horizon-server-linux-x86_64.tar.gz","size":32760345},{"name":"horizon-windows-x64.zip","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/v0.2.96/horizon-windows-x64.zip","size":31767600},{"name":"SHA256SUMS","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/v0.2.96/SHA256SUMS","size":375},{"name":"SHA256SUMS.sig","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/v0.2.96/SHA256SUMS.sig","size":89},{"name":"smoke-test.json","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/v0.2.96/smoke-test.json","size":185}]},{"tag_name":"v0.2.95","name":"Horizon 0.2.95: Zip and 6 more fixes","published_at":"2026-10-28T18:41:19Z","html_url":"https://github.com/horizon-rust/horizon/releases/tag/v0.2.95","prerelease":false,"body":"\u003ch3>Want to play? Download the \u003ca href=\"https://playhorizon.dev\">Horizon launcher\u003c/a>, not the files below\u003c/h3>\u003cp>It installs this version and keeps it up to date. It is also on GitHub: \u003ca href=\"https://github.com/horizon-rust/horizon/releases?q=launcher&amp;expanded=true\">the launcher releases\u003c/a>. You need your own copy of Minecraft: Java Edition. The files below are what the launcher installs, and the dedicated server for people who host one.\u003c/p>\n\n### Fixed\n- horizon-server: bound HTTP request and header lines (#2817)\n- Worldgen: build a biome source's feature decoration once, ahead of the world (#3281)\n- Add a regression test for the entity draw distance (#2736, fixes #2273)\n- Select World: deleting the last world opens Create New World, as vanilla does (#2771)\n- ui: the mouse position is the centre whenever the grab state changes (#2797, fixes #1925)\n- The shulker's body stays square to its block while the head turns (#2808, fixes #1661)\n- Zip: don't trust an entry's declared sizes for allocation (#2815)\n\n### Known issues\n- Shader packs have been removed for now. They will come back later, written again from scratch. Packs in your `shaderpacks` folder are left where they are.\n\nThanks to @ASOwnerYT, @levzzz5154, @sirrayi.\n\nNot an official Minecraft product. Not approved by or associated with Mojang or Microsoft.\n","assets":[{"name":"horizon-linux-x86_64.tar.gz","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/v0.2.95/horizon-linux-x86_64.tar.gz","size":33415690},{"name":"horizon-macos-arm64.zip","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/v0.2.95/horizon-macos-arm64.zip","size":29427834},{"name":"horizon-server-linux-x86_64.tar.gz","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/v0.2.95/horizon-server-linux-x86_64.tar.gz","size":32712690},{"name":"horizon-windows-x64.zip","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/v0.2.95/horizon-windows-x64.zip","size":31719977},{"name":"SHA256SUMS","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/v0.2.95/SHA256SUMS","size":375},{"name":"SHA256SUMS.sig","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/v0.2.95/SHA256SUMS.sig","size":89},{"name":"smoke-test.json","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/v0.2.95/smoke-test.json","size":185}]},{"tag_name":"v0.2.94","name":"Horizon 0.2.94: Keep the animated textures on in every graphics preset and 4 more fixes","published_at":"2026-10-28T17:39:26Z","html_url":"https://github.com/horizon-rust/horizon/releases/tag/v0.2.94","prerelease":false,"body":"\u003ch3>Want to play? Download the \u003ca href=\"https://playhorizon.dev\">Horizon launcher\u003c/a>, not the files below\u003c/h3>\u003cp>It installs this version and keeps it up to date. It is also on GitHub: \u003ca href=\"https://github.com/horizon-rust/horizon/releases?q=launcher&amp;expanded=true\">the launcher releases\u003c/a>. You need your own copy of Minecraft: Java Edition. The files below are what the launcher installs, and the dedicated server for people who host one.\u003c/p>\n\n### Fixed\n- Mod registry: validate source-only native mod bundles (#3140)\n- trial spawner: a spawn egg sets its mob, as overrideEntityToSpawn does (#3064, fixes #3041)\n- Server: feed the chunk workers between ticks while players' chunks load (#3250)\n- Log a chat message once, as [CHAT] (#3262, fixes #3261)\n- Keep the animated textures on in every graphics preset (#2742, fixes #2064)\n\n### Known issues\n- Shader packs have been removed for now. They will come back later, written again from scratch. Packs in your `shaderpacks` folder are left where they are.\n\nThanks to @Domanffe, @iLostName, @levzzz5154.\n\nNot an official Minecraft product. Not approved by or associated with Mojang or Microsoft.\n","assets":[{"name":"horizon-linux-x86_64.tar.gz","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/v0.2.94/horizon-linux-x86_64.tar.gz","size":33408790},{"name":"horizon-macos-arm64.zip","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/v0.2.94/horizon-macos-arm64.zip","size":29425028},{"name":"horizon-server-linux-x86_64.tar.gz","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/v0.2.94/horizon-server-linux-x86_64.tar.gz","size":32706907},{"name":"horizon-windows-x64.zip","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/v0.2.94/horizon-windows-x64.zip","size":31715120},{"name":"SHA256SUMS","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/v0.2.94/SHA256SUMS","size":375},{"name":"SHA256SUMS.sig","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/v0.2.94/SHA256SUMS.sig","size":89},{"name":"smoke-test.json","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/v0.2.94/smoke-test.json","size":185}]},{"tag_name":"v0.2.93","name":"Horizon 0.2.93: Server lag in new forests, subtitles","published_at":"2026-10-28T07:28:48Z","html_url":"https://github.com/horizon-rust/horizon/releases/tag/v0.2.93","prerelease":false,"body":"\u003ch3>Want to play? Download the \u003ca href=\"https://playhorizon.dev\">Horizon launcher\u003c/a>, not the files below\u003c/h3>\u003cp>It installs this version and keeps it up to date. It is also on GitHub: \u003ca href=\"https://github.com/horizon-rust/horizon/releases?q=launcher&amp;expanded=true\">the launcher releases\u003c/a>. You need your own copy of Minecraft: Java Edition. The files below are what the launcher installs, and the dedicated server for people who host one.\u003c/p>\n\n### Fixed\n- Subtitles: fix closed captions never appearing (#2868)\n- Server lag in new forests: count minecart signals only when a detector rail reads them (#3058)\n\n### Known issues\n- Shader packs have been removed for now. They will come back later, written again from scratch. Packs in your `shaderpacks` folder are left where they are.\n\nThanks to @kacpherek, @masa-masa-0314.\n\nNot an official Minecraft product. Not approved by or associated with Mojang or Microsoft.\n","assets":[{"name":"horizon-linux-x86_64.tar.gz","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/v0.2.93/horizon-linux-x86_64.tar.gz","size":33392460},{"name":"horizon-macos-arm64.zip","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/v0.2.93/horizon-macos-arm64.zip","size":29404466},{"name":"horizon-server-linux-x86_64.tar.gz","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/v0.2.93/horizon-server-linux-x86_64.tar.gz","size":32688733},{"name":"horizon-windows-x64.zip","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/v0.2.93/horizon-windows-x64.zip","size":31690610},{"name":"SHA256SUMS","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/v0.2.93/SHA256SUMS","size":375},{"name":"SHA256SUMS.sig","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/v0.2.93/SHA256SUMS.sig","size":89},{"name":"smoke-test.json","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/v0.2.93/smoke-test.json","size":182}]},{"tag_name":"v0.2.92","name":"Horizon 0.2.92: feat, fix, books and 22 more fixes","published_at":"2026-10-28T01:44:46Z","html_url":"https://github.com/horizon-rust/horizon/releases/tag/v0.2.92","prerelease":false,"body":"\u003ch3>Want to play? Download the \u003ca href=\"https://playhorizon.dev\">Horizon launcher\u003c/a>, not the files below\u003c/h3>\u003cp>It installs this version and keeps it up to date. It is also on GitHub: \u003ca href=\"https://github.com/horizon-rust/horizon/releases?q=launcher&amp;expanded=true\">the launcher releases\u003c/a>. You need your own copy of Minecraft: Java Edition. The files below are what the launcher installs, and the dedicated server for people who host one.\u003c/p>\n\n### Fixed\n- Empty a bundle by holding right click (#2408)\n- Let tame parrots follow their owner and sit when told to (#2382)\n- Fix creative inventory off-hand swap crash on Key F (#2956)\n- Creative inventory: fix the search box keeping the last search after closing (#2887, fixes #2873)\n- Fonts: Pixelify Sans gets the Cyrillic О and П it was missing (#2844)\n- Enable the High Contrast Block Outline option (#2965)\n- Allow F13-F24 and other extended keys in key bindings (#2958)\n- Play the player's own bites while eating on a remote server (#2834)\n- perf(assets): drop the spare capacity of the sprite pixel buffer (#3017)\n- Skip mod recipe tables until the world resources are loaded (#2943, fixes #2928)\n- A hit rolls the armadillo up into a ball (#2852, fixes #2759)\n- remote: a server's client doesn't load the loot tables on its first tick (#2840)\n- Apply blindness fog and hide the blocked sky (#2967)\n- Options: add Java 26.3 mouse settings (#2931)\n- server packs: the download prompt acts as the screen it is (#2837)\n- Render beacon beams, Christmas chests and glow frame maps like vanilla (#2953)\n- Telemetry server: count IPv6 clients by /64 in the rate limits (#2822)\n- Show Nausea on the player: spin the view and draw the swirl (#2972)\n- Award the target hit and honey slide advancements (#2968)\n- Armor stands press pressure plates; match vanilla's op warning in item tooltips (#2944)\n- Update rustls-webpki and webpki-roots for RUSTSEC-2026-0382 and -0381 (#2883)\n- Count down Riptide's spin on a server's copy of a player (#2878, fixes #2782)\n- Books: page click events work, run_command ones included (#2891)\n- fix(client): the first-person arm and the player models wear the player's own skin (#2980, fixes #2921)\n- feat(client): slim skins wear the slim player model (#3004, fixes #2926)\n\n### Known issues\n- Shader packs have been removed for now. They will come back later, written again from scratch. Packs in your `shaderpacks` folder are left where they are.\n\nThanks to @DanielGodriNeto, @Domanffe, @elythepreciouscat, @feeldev12, @gemakfy, @iLostName, @kacpherek, @leifiyoo, @levzzz5154, @masa-masa-0314, @sirrayi, @socksprox.\n\nNot an official Minecraft product. Not approved by or associated with Mojang or Microsoft.\n","assets":[{"name":"horizon-linux-x86_64.tar.gz","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/v0.2.92/horizon-linux-x86_64.tar.gz","size":33404062},{"name":"horizon-macos-arm64.zip","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/v0.2.92/horizon-macos-arm64.zip","size":29411881},{"name":"horizon-server-linux-x86_64.tar.gz","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/v0.2.92/horizon-server-linux-x86_64.tar.gz","size":32701546},{"name":"horizon-windows-x64.zip","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/v0.2.92/horizon-windows-x64.zip","size":31703435},{"name":"SHA256SUMS","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/v0.2.92/SHA256SUMS","size":375},{"name":"SHA256SUMS.sig","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/v0.2.92/SHA256SUMS.sig","size":89},{"name":"smoke-test.json","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/v0.2.92/smoke-test.json","size":177}]},{"tag_name":"launcher@0.2.23","name":"Horizon launcher 0.2.23","published_at":"2026-10-28T22:23:27Z","html_url":"https://github.com/horizon-rust/horizon/releases/tag/launcher%400.2.23","prerelease":false,"body":"","assets":[{"name":"horizon-launcher-linux-x86_64.tar.gz","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/launcher%400.2.23/horizon-launcher-linux-x86_64.tar.gz","size":18961611},{"name":"horizon-launcher-macos-arm64.dmg","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/launcher%400.2.23/horizon-launcher-macos-arm64.dmg","size":13135477},{"name":"horizon-launcher-macos-arm64.zip","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/launcher%400.2.23/horizon-launcher-macos-arm64.zip","size":12183879},{"name":"horizon-launcher-windows-x64.zip","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/launcher%400.2.23/horizon-launcher-windows-x64.zip","size":13635127},{"name":"SHA256SUMS","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/launcher%400.2.23/SHA256SUMS","size":400},{"name":"SHA256SUMS.sig","browser_download_url":"https://github.com/horizon-rust/horizon/releases/download/launcher%400.2.23/SHA256SUMS.sig","size":89}]}]}</script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // Reveal animations on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal, .reveal-media').forEach(el => observer.observe(el));
+
+  // Theme toggle
+  const themeBtn = document.querySelector('.theme-toggle');
+  const themeLabel = document.querySelector('[data-theme-label]');
+  const updateThemeLabel = () => {
+    const isDark = document.documentElement.dataset.theme === 'dark' || 
+      (!document.documentElement.dataset.theme && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    if (themeLabel) themeLabel.textContent = isDark ? 'Light' : 'Dark';
+  };
+  updateThemeLabel();
+
+  if (themeBtn) {
+    themeBtn.addEventListener('click', () => {
+      const current = document.documentElement.dataset.theme;
+      const next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.dataset.theme = next;
+      try { localStorage.setItem('theme', next); } catch(e) {}
+      updateThemeLabel();
+    });
+  }
+
+  // Mobile menu button
+  const menuBtn = document.querySelector('.menu-button');
+  const navLinks = document.querySelector('.nav-links');
+  if (menuBtn && navLinks) {
+    menuBtn.addEventListener('click', () => {
+      const expanded = menuBtn.getAttribute('aria-expanded') === 'true';
+      menuBtn.setAttribute('aria-expanded', !expanded);
+      navLinks.classList.toggle('is-open');
+    });
+  }
+});
+</script></body>
+</html>
