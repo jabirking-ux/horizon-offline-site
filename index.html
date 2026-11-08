@@ -36,6 +36,18 @@ html, body {
 a, button, input[type="button"], input[type="submit"], [role="button"], select {
   cursor: url('assets/cursors/pointinghand.svg') 12 8, url('assets/cursors/pointinghand.png') 12 8, pointer;
 }
+input[type="text"], textarea, pre, code {
+  cursor: url('assets/cursors/ibeamvertical.svg') 11 10, url('assets/cursors/ibeamvertical.png') 11 10, text;
+}
+.draggable, [draggable="true"] {
+  cursor: url('assets/cursors/openhand.svg') 15 16, url('assets/cursors/openhand.png') 15 16, grab;
+}
+.draggable:active {
+  cursor: url('assets/cursors/closedhand.svg') 15 16, url('assets/cursors/closedhand.png') 15 16, grabbing !important;
+}
+[disabled], .disabled {
+  cursor: url('assets/cursors/notallowed.svg') 5 5, url('assets/cursors/notallowed.png') 5 5, not-allowed !important;
+}
 :root {
 --page: #ece7f7;
 --plate-soft: #e9e3f8;
